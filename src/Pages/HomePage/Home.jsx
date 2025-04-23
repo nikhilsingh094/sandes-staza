@@ -1,0 +1,26 @@
+import React from 'react'
+import Navbar from '../../components/LandingPage/Navbar'
+import Landing from '../../components/LandingPage/Landing'
+import Features from '../../components/LandingPage/Features'
+import About from '../../components/LandingPage/About'
+import Statistics from '../../components/LandingPage/Statistics'
+import LatestNews from '../../components/LandingPage/LatestNews'
+import Footer from '../../components/LandingPage/Footer'
+
+function Home() {
+    return (
+        <>
+            <div className="home_comp" style={{ padding: "2% 4%" }}>
+                <Navbar />
+                <Landing />
+                <Features />
+                <About />
+                <Statistics />
+                <LatestNews />
+            </div>
+            <Footer />
+        </>
+    )
+}
+
+export default Home
