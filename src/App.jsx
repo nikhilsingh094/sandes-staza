@@ -11,11 +11,13 @@ import {
 } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Dlinks from "./Pages/Dlinks/Dlinks";
+import APPInsights from "./Pages/APPInsights/APPInsights";
 
 function App() {
   return (
     <Router>
       <Routes>
+      <Route path="/APPInsights" element={<APPInsights />} />
         <Route path="/Dlinks" element={<Dlinks />} />
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/LoginWeb" element={<Login />} />

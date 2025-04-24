@@ -91,7 +91,7 @@ export default function NavbarDash() {
         <p>App Download</p>
       </MenuItem>
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+        <IconButton size="large" aria-label="show 4 new mails" href='/Dashboard' color="inherit">
           <Badge badgeContent={4} color="error">
           <FontAwesomeIcon icon={faChartLine} />
           </Badge>
@@ -135,7 +135,7 @@ export default function NavbarDash() {
               <FontAwesomeIcon icon={faMobile} />
             </Badge>
           </IconButton>
-          <IconButton size="large" color="inherit">
+          <IconButton size="large" href='/Dashboard' color="inherit">
             <Badge badgeContent={17} color="error">
               <FontAwesomeIcon icon={faChartLine} />
             </Badge>
