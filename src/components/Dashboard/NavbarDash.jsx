@@ -1,111 +1,119 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Badge from '@mui/material/Badge';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreIcon from '@mui/icons-material/MoreVert';
-
-
+import {
+  AppBar, Box, Toolbar, IconButton, Typography, Badge, MenuItem, Menu
+} from '@mui/material';
+import {
+  Menu as MenuIcon, AccountCircle, Mail as MailIcon,
+  Notifications as NotificationsIcon, MoreVert as MoreIcon
+} from '@mui/icons-material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faMobile, faChartLine, faBuildingColumns, faBars
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function NavbarDash() {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorElProfile, setAnchorElProfile] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
+  const isProfileMenuOpen = Boolean(anchorElProfile);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
+  const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
+  const handleProfileMenuOpen = (event) => setAnchorElProfile(event.currentTarget);
+  const handleMobileMenuOpen = (event) => setMobileMoreAnchorEl(event.currentTarget);
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+    setAnchorElProfile(null);
     handleMobileMenuClose();
   };
+  const handleMobileMenuClose = () => setMobileMoreAnchorEl(null);
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={menuId}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id="org-menu"
       keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {[
+        "Organization Management", "Organization Units", "Designations",
+        "Members", "Search/Locate Member", "Groups", "Import Employees"
+      ].map((item) => (
+        <MenuItem key={item} onClick={handleMenuClose}>{item}</MenuItem>
+      ))}
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const renderMenuProfile = (
+    <Menu
+      anchorEl={anchorElProfile}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id="profile-menu"
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isProfileMenuOpen}
+      onClose={handleMenuClose}
+    >
+      {[
+        "Sign in as MINISTRY ADMIN Ministry for POC",
+        "Signed in as O ADMIN Organization for POC",
+        "Sign in as OU ADMIN OU for POC",
+        "Logged in as 9984261451",
+        "Logout"
+      ].map((item) => (
+        <MenuItem key={item} onClick={handleMenuClose}>{item}</MenuItem>
+      ))}
+    </Menu>
+  );
+
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={mobileMenuId}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id="primary-search-account-menu-mobile"
       keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+        <IconButton size="large" aria-label="show 4 new mails" href='/Dlinks' color="inherit">
           <Badge badgeContent={4} color="error">
-            <MailIcon />
+          <FontAwesomeIcon icon={faMobile} />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>App Download</p>
       </MenuItem>
       <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+          <Badge badgeContent={4} color="error">
+          <FontAwesomeIcon icon={faChartLine} />
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <p>Graph</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
+          <Badge badgeContent={17} color="error">
+          <FontAwesomeIcon icon={faBuildingColumns} />
+          </Badge>
+        </IconButton>
+        <p>Nevigate</p>
+      </MenuItem>
+      <MenuItem onClick={handleMenuOpen}>
+        <IconButton size="large" aria-label="account of current user" color="inherit">
+        <FontAwesomeIcon icon={faBars} />
+        </IconButton>
+        <p>Menu</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
+        <IconButton size="large" aria-label="account of current user" color="inherit">
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
@@ -114,71 +122,49 @@ export default function NavbarDash() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      {/* <AppBar position="static"> */}
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
+    <Box sx={{ flexGrow: 1, mt: "1%" }}>
+      <Toolbar>
+        <img src="assets/images/ashok.png" alt="logo" loading="lazy" width="40px" style={{ marginRight: '25px' }} />
+        <img src="assets/images/sandes_logo.png" alt="logo" loading="lazy" width="65px" />
+
+        <Box sx={{ flexGrow: 1 }} />
+
+        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <IconButton size="large" href='/Dlinks' color="inherit">
+            <Badge badgeContent={4} color="error">
+              <FontAwesomeIcon icon={faMobile} />
+            </Badge>
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
-            MUI
-          </Typography>
-        
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </Box>
-        </Toolbar>
-      {/* </AppBar>/ */}
+          <IconButton size="large" color="inherit">
+            <Badge badgeContent={17} color="error">
+              <FontAwesomeIcon icon={faChartLine} />
+            </Badge>
+          </IconButton>
+          <IconButton size="large" color="inherit">
+            <Badge badgeContent={20} color="error">
+              <FontAwesomeIcon icon={faBuildingColumns} />
+            </Badge>
+          </IconButton>
+
+
+          <IconButton size="large" onClick={handleMenuOpen} color="inherit">
+            <FontAwesomeIcon icon={faBars} />
+          </IconButton>
+          <IconButton size="large" onClick={handleProfileMenuOpen} color="inherit">
+            <AccountCircle />
+          </IconButton>
+        </Box>
+
+        <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+          <IconButton size="large" onClick={handleMobileMenuOpen} color="inherit">
+            <MoreIcon />
+          </IconButton>
+        </Box>
+      </Toolbar>
+
       {renderMobileMenu}
       {renderMenu}
+      {renderMenuProfile}
     </Box>
   );
 }
