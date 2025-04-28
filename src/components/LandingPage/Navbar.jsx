@@ -1,111 +1,99 @@
-import * as React from 'react';
-import {
-    Box,
-    Toolbar,
-    Typography,
-    Button,
-    Stack,
-    IconButton,
-    Drawer,
-    List,
-    ListItem,
-    ListItemText,
-    useMediaQuery
-} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import { useTheme } from '@mui/material/styles';
+import React, { useState } from "react";
+import sandes_logo from "../../assets/sandes_logo.png";
+import ashoklogo from "../../assets/ashoklogo.png";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { RxCross2 } from "react-icons/rx";
+import { Button } from "@mui/material";
+import { Link } from 'react-router-dom';
 
-export default function Navbar() {
-    const [openDrawer, setOpenDrawer] = React.useState(false);
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-    const handleDrawerToggle = () => {
-        setOpenDrawer(!openDrawer);
-    };
 
-    const navLinks = ['Home', 'About', 'Features', 'Latest News'];
+function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
 
-    return (
-        <Box>
-            <Toolbar sx={{ justifyContent: 'space-between' }}>
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
-                <Box sx={{ display: 'inline-flex', width: '32%', alignItems: 'center' }}>
-                    <img
-                        src="assets/images/ashok.png"
-                        alt="logo"
-                        loading="lazy"
-                        width="40px"
-                        style={{ marginRight: '25px' }}
-                    />
-                    <img
-                        src="assets/images/sandes_logo.png"
-                        alt="logo"
-                        loading="lazy"
-                        width="65px"
-                    />
-                </Box>
+  return (
+    <nav className="sticky top-0 z-50 bg-white/70 backdrop-blur-md">
+      <div className=" mx-auto py-2 flex items-center justify-between">
+        <div className="flex items-center gap-2 cursor-pointer">
+          <img
+            className="w-10 mix-blend-difference"
+            src={ashoklogo}
+            alt="ashoklogo"
+          />
+          <img className="w-16" src={sandes_logo} alt="sandes_logo" />
+        </div>
+        <div className="hidden md:flex items-center gap-12">
+          <p className="text-xl font-semibold text-[#168A43] cursor-pointer hover:text-gray-600">
+            Home
+          </p>
+          <p className="text-xl font-semibold text-[#168A43] cursor-pointer hover:text-gray-600">
+            Features
+          </p>
+          <p className="text-xl font-semibold text-[#168A43] cursor-pointer hover:text-gray-600">
+            Latest News
+          </p>
+        </div>
+        <div className="hidden md:flex items-center gap-4">
+          <Link
+            to="/LoginAdmin"
+            className="block w-full text-left btn btn-outline btn-success bg-transparent text-[#168A43] hover:text-gray-500 mt-2"
+            style={{width:"130px"}}
+          >
+            Sandes Admin
+          </Link>
+          <Link
+            to="/LoginWeb"
+            className="block w-full text-left btn btn-outline btn-success bg-transparent text-[#168A43] hover:text-gray-500 mt-2"
+            style={{width:"120px"}}
+          >
+            Sandes Web
+          </Link>
 
-                {isMobile ? (
-                    <IconButton onClick={handleDrawerToggle}>
-                        <MenuIcon />
-                    </IconButton>
-                ) : (
-                    <Box sx={{ display: 'inline-flex', width: '32%' }}>
-                        {navLinks.map((link) => (
-                            <Typography key={link} variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                                {link}
-                            </Typography>
-                        ))}
-                    </Box>
-                )}
-                {!isMobile && (
-                    <Box sx={{ display: 'inline-flex', width: '32%', justifyContent: 'end' }}>
-                        <Stack direction="row" spacing={2}>
-                            <Button color="success" variant="contained" sx={{ borderRadius: '25px' }} href='/LoginAdmin'>
-                                Admin Login
-                            </Button>
-                            <Button
-                                color="success"
-                                variant="contained"
-                                sx={{ borderRadius: '25px' }}
-                                href="/LoginWeb"
-                            >
-                                Web Login
-                            </Button>
-                        </Stack>
-                    </Box>
-                )}
-            </Toolbar>
-            <Drawer
-                anchor="right"
-                open={openDrawer}
-                onClose={handleDrawerToggle}
-                PaperProps={{ sx: { width: '250px' } }}
-            >
-                <Box sx={{ p: 2 }}>
-                    <List>
-                        {navLinks.map((text) => (
-                            <ListItem button key={text}>
-                                <ListItemText primary={text} />
-                            </ListItem>
-                        ))}
-                    </List>
-                    <Stack direction="column" spacing={2} sx={{ mt: 2 }}>
-                        <Button color="success" variant="contained" sx={{ borderRadius: '25px' }} href='/LoginAdmin'>
-                            Admin Login
-                        </Button>
-                        <Button
-                            color="success"
-                            variant="contained"
-                            sx={{ borderRadius: '25px' }}
-                            href="/LoginWeb"
-                        >
-                            Web Login
-                        </Button>
-                    </Stack>
-                </Box>
-            </Drawer>
-        </Box>
-    );
+        </div>
+
+        <div className="md:hidden flex items-center">
+          <button onClick={toggleMenu}>
+            {isOpen ? <RxCross2 size={28} /> : <RxHamburgerMenu size={28} />}
+          </button>
+        </div>
+      </div>
+
+      {isOpen && (
+        <div className="md:hidden bg-white/70 backdrop-blur-md shadow-md px-4 py-4 space-y-4">
+          <p className="text-lg font-semibold text-[#168A43] cursor-pointer hover:text-gray-600">
+            Home
+          </p>
+          <p className="text-lg font-semibold text-[#168A43] cursor-pointer hover:text-gray-600">
+            Features
+          </p>
+          <p className="text-lg font-semibold text-[#168A43] cursor-pointer hover:text-gray-600">
+            Latest News
+          </p>
+          {/* <Link to="/LoginAdmin"> */}
+          {/* <Button.a href="/LoginAdmin" className="block w-full text-left btn btn-outline btn-success bg-transparent text-[#168A43] hover:text-gray-500 mt-2">
+            Sandes Portal
+          </Button.a> */}
+          <Link
+            to="/LoginAdmin"
+            className="block w-full text-left btn btn-outline btn-success bg-transparent text-[#168A43] hover:text-gray-500 mt-2"
+          >
+            Sandes Portal
+          </Link>
+          {/* </Link> */}
+          <Link
+            to="/LoginWeb"
+            className="block w-full text-left btn btn-outline btn-success bg-transparent text-[#168A43] hover:text-gray-500 mt-2"
+          >
+            Sandes Web
+          </Link>
+        </div>
+      )}
+    </nav>
+  );
 }
+
+export default Navbar;

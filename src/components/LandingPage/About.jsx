@@ -1,58 +1,48 @@
 import React from "react";
-import { Button, Typography, Grid, Box , useMediaQuery, useTheme} from "@mui/material";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGooglePlay, faApple } from '@fortawesome/free-brands-svg-icons';
+import about from "../../assets/about.png";
 
 function About() {
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-    return (
-        <>
-            <Box sx={{ background: "linear-gradient(310deg, #FFF8F3 0%,rgb(157, 235, 209) 100%)" }}>
+  return (
+    <div className="bg-transparent">
+      <div className="min-h-[600px] relative w-full flex flex-col lg:flex-row items-center justify-evenly gap-12 p-6 md:p-16">
+        {/* Background Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#36904A]/70 via-white/30 to-[#36904A]/50 z-0 blur-3xl rounded-full animate-pulse"></div>
 
-                <Grid container spacing={4} alignItems="center" >
-                    <Grid item xs={12} md={6} sx={{ padding: "1% 2%",width: isMobile?"100%":"50%"}}>
-                        <img src="assets/images/about.png" alt="Chat" style={{ width: isMobile?"100%":"60%" }} />
-                    </Grid>
-                    <Grid item xs={12} md={6} sx={{width: isMobile?"100%":"45%"}}>
-                        <Typography variant="h5" fontWeight="bold" gutterBottom>
-                            About Sandes
-                        </Typography>
-                        <Typography variant="body1">
-                            Sandes, an initiative by the Government of India under Atma Nirbhar Bharat, is a platform to facilitate
-                            government officials and citizens to securely exchange messages. Unique features of Sandes include
-                            integration with eGov application to enable G2C, C2G, and G2G governance at your fingertips.
-                        </Typography>
+        {/* Image Section */}
+        <div className="relative z-10 flex justify-center">
+          <div className="relative">
+            <img
+              className="max-w-xs md:max-w-md h-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
+              src={about}
+              alt="About Sandes"
+            />
+            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-[#36904A]/20 rounded-full blur-xl"></div>
+          </div>
+        </div>
 
-                        <Box mt={6} display="flex" flexDirection={{ xs: "column", sm: "row" }} gap={2}>
-                            <Button
-                                variant="contained"
-                                startIcon={<FontAwesomeIcon icon={faGooglePlay} style={{ fontSize: "50px" }} />}
-                                sx={{ backgroundColor: "#000", textTransform: "none", alignItems: "flex-start", borderRadius: "10px", maxWidth: "200px" }}
-                            >
-                                <Box display="flex" flexDirection="column" alignItems="flex-start">
-                                    <span>GET IT ON</span>
-                                    <strong style={{ fontSize: "18px" }}>Google Play</strong>
-                                </Box>
-                            </Button>
-                            <Button
-                                variant="contained"
-                                startIcon={<FontAwesomeIcon icon={faApple} style={{ fontSize: "50px" }} />}
-                                sx={{ backgroundColor: "#000", textTransform: "none", alignItems: "flex-start", borderRadius: "10px", maxWidth: "200px" }}
-                            >
-                                <Box display="flex" flexDirection="column" alignItems="flex-start">
-                                    <span>Download on the</span>
-                                    <strong style={{ fontSize: "18px" }}>App Store</strong>
-                                </Box>
-                            </Button>
-                        </Box>
-                    </Grid>
-                </Grid>
-
-            </Box>
-
-        </>
-    )
+        {/* Text Section */}
+        <div className="relative z-10 max-w-lg text-center lg:text-left">
+          <h1 className="text-4xl md:text-5xl font-bold text-[#36904A] mb-4 tracking-tight">
+            Discover Sandes
+          </h1>
+          <p className="text-lg md:text-xl text-gray-700 font-medium leading-relaxed">
+            Sandes, proudly launched under India's <span className="font-semibold text-[#36904A]">Atma Nirbhar Bharat</span> initiative, is a secure messaging platform empowering government officials and citizens. With seamless integration into eGov applications, Sandes enables efficient G2C, C2G, and G2G communication at your fingertips.
+          </p>
+          <p className="text-lg md:text-xl text-gray-700 font-medium mt-4 leading-relaxed">
+            Enjoy end-to-end encrypted messages, audio-video calls, and file sharing. Managed by onboarded organization admins, Sandes ensures robust user management and is accessible to all registered users via the web portal.
+          </p>
+          <div className="mt-8">
+            <a
+              href="#learn-more"
+              className="inline-block px-8 py-3 bg-[#36904A] text-white font-semibold rounded-full shadow-lg hover:bg-[#2a7038] transition-colors duration-300"
+            >
+              Learn More
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default About
+export default About;

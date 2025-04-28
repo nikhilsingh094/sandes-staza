@@ -14,6 +14,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { Link } from 'react-router-dom';
 
 function Dashboard_Admin() {
     const [open, setOpen] = useState(false);
@@ -153,9 +154,11 @@ function Dashboard_Admin() {
 
                 <div className="col-md-3 mt-3">
                     <div class="card" style={{ width: "100%" }}>
+                        <Link to="/OrganizationOverview">
                         <div class="card-body d-flex">
                             <FontAwesomeIcon icon={faCube} fontSize="65" /> <p class="card-text ml-4">Organizations Units <br /><strong style={{ fontSize: "30px" }}>2</strong></p>
                         </div>
+                        </Link>
                     </div>
                 </div>
                 <div className="col-md-3 mt-3">

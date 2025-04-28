@@ -1,52 +1,111 @@
 import React from "react";
-import { Button, Typography, Grid, Box } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGooglePlay, faApple } from '@fortawesome/free-brands-svg-icons';
+import { motion } from "framer-motion";
+import home from "../../assets/hm.png";
+import { FaGooglePlay, FaApple } from "react-icons/fa";
 
 function Landing() {
-    const theme = useTheme();
-    return (
-        <>
-            <Box sx={{ background: "linear-gradient(130deg, #FFF8F3 20%, #F2FBF8 100%)", minHeight: "100%" }}>
-                <Grid container spacing={4} alignItems="center">
-                    <Grid item xs={12} md={6} sx={{ padding: { xs: "8% 4%", md: "12% 2%" } }}>
-                        <Typography variant="h4" fontWeight="bold" gutterBottom sx={{ width: { xs: "100%", md: "85%" } }}>
-                            Innovating And Instant Messaging System
-                        </Typography>
-                        <Typography variant="body1" gutterBottom sx={{ width: { xs: "100%", md: "60%" } }}>
-                            Sandes an initiative by the Government of India Under Atma Nirbhar Bharat
-                        </Typography>
-                        <Box mt={6} display="flex" flexDirection={{ xs: "column", sm: "row" }} gap={2}>
-                            <Button
-                                variant="contained"
-                                startIcon={<FontAwesomeIcon icon={faGooglePlay} style={{ fontSize: "50px" }} />}
-                                sx={{ backgroundColor: "#000", textTransform: "none", alignItems: "flex-start", borderRadius: "10px", maxWidth: "200px" }}
-                            >
-                                <Box display="flex" flexDirection="column" alignItems="flex-start">
-                                    <span>GET IT ON</span>
-                                    <strong style={{ fontSize: "18px" }}>Google Play</strong>
-                                </Box>
-                            </Button>
-                            <Button
-                                variant="contained"
-                                startIcon={<FontAwesomeIcon icon={faApple} style={{ fontSize: "50px" }} />}
-                                sx={{ backgroundColor: "#000", textTransform: "none", alignItems: "flex-start", borderRadius: "10px", maxWidth: "200px" }}
-                            >
-                                <Box display="flex" flexDirection="column" alignItems="flex-start">
-                                    <span>Download on the</span>
-                                    <strong style={{ fontSize: "18px" }}>App Store</strong>
-                                </Box>
-                            </Button>
-                        </Box>
-                    </Grid>
-                    <Grid item xs={12} md={6} sx={{ width: { xs: "100%", md: "49%" }, marginLeft: { md: "5%" } }}>
-                        <img src="assets/images/home.png" alt="Illustration" style={{ width: "100%" }} />
-                    </Grid>
-                </Grid>
-            </Box>
-        </>
-    )
+  
+  const textVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
+  const imageVariants = {
+    hidden: { opacity: 0, x: 30 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut", delay: 0.3 },
+    },
+  };
+
+  const buttonVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.5, ease: "easeOut", delay: 0.5 },
+    },
+    hover: { scale: 1.05, transition: { duration: 0.3 } },
+  };
+
+  return (
+    <div className="min-h-[500px] w-full bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+        
+        <div className="absolute inset-0 bg-gradient-to-br from-[#F9B26A]/40 via-white/20 to-[#168A43]/30 blur-3xl rounded-3xl transform scale-110"></div>
+        <div className="absolute top-0 left-0 w-32 h-32 bg-[#F9B26A]/20 rounded-full filter blur-xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-40 h-40 bg-[#168A43]/20 rounded-full filter blur-xl animate-pulse delay-300"></div>
+
+        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16">
+      
+          <motion.div
+            className="flex-1 text-center lg:text-left"
+            variants={textVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#168A43] leading-tight mb-4 tracking-tight">
+              Connect Instantly, Innovate Freely
+            </h1>
+            <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0 font-medium">
+              Sandes: Empowering secure communication with India's Atma Nirbhar
+              Bharat initiative
+            </p>
+        
+            <div className="flex justify-center lg:justify-center gap-4 items-center">
+              <motion.a
+                href="#"
+                className="flex items-center gap-2 px-6 py-3 bg-transparent border-2 border-[#168A43] text-[#168A43] rounded-full font-semibold text-base sm:text-lg hover:bg-[#168A43] hover:shadow-lg transition-all duration-300 hover:text-green-600"
+                variants={buttonVariants}
+                initial="hidden"
+                animate="visible"
+                whileHover="hover"
+              >
+                <FaGooglePlay className="text-xl" />
+                Get on Google Play
+              </motion.a>
+              <motion.a
+                href="#"
+                className="flex items-center gap-2 px-6 py-3 bg-transparent border-2 border-[#168A43] text-[#168A43] rounded-full font-semibold text-base sm:text-lg hover:bg-[#168A43] hover:shadow-lg transition-all duration-300 hover:text-green-600"
+                variants={buttonVariants}
+                initial="hidden"
+                animate="visible"
+                whileHover="hover"
+              >
+                <FaApple className="text-xl" />
+                Download on App Store
+              </motion.a>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="flex-1 relative"
+            variants={imageVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <div className="relative">
+              <motion.img
+                className="w-full max-w-md lg:max-w-lg mx-auto mix-blend-overlay"
+                src={home}
+                alt="Sandes App Preview"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+              />
+           
+              <div className="absolute -top-6 -left-6 w-10 h-10 bg-[#F9B26A] rounded-full opacity-40 animate-pulse"></div>
+              <div className="absolute bottom-4 right-4 w-8 h-8 bg-[#168A43] rounded-full opacity-40 animate-pulse delay-200"></div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default Landing
+export default Landing;

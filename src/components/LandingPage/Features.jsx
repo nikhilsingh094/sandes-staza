@@ -1,86 +1,79 @@
 import * as React from 'react';
-import {
-    Timeline,
-    TimelineItem,
-    TimelineSeparator,
-    TimelineConnector,
-    TimelineContent,
-    TimelineOppositeContent,
-    TimelineDot
-} from '@mui/lab';
-import { Paper, Typography, Box, useMediaQuery, useTheme } from '@mui/material';
+import { motion } from 'framer-motion';
+
+const slideInVariant = {
+    hidden: (direction) => ({
+        opacity: 0,
+        x: direction === 'left' ? -100 : 100,
+    }),
+    visible: {
+        opacity: 1,
+        x: 0,
+        transition: {
+            type: 'spring',
+            stiffness: 50,
+            damping: 20,
+        },
+    },
+};
 
 const roadmapData = [
     {
-        text: "Hosted at government infrastructure and governed by rules and regulations of GOI.",
-        image: "assets/images/Hosted.jpg"
+        text: 'Hosted at government infrastructure and governed by rules and regulations of GOI.',
+        image: 'assets/images/Hosted.jpg',
     },
     {
-        text: "Data and Strategic control with Government.",
-        image: "assets/images/Data_store.png"
+        text: 'Data and Strategic control with Government.',
+        image: 'assets/images/Data_store.png',
     },
     {
-        text: "Web Portal for Organisation/Member Management and Dashboard Services",
-        image: "assets/images/WebPortal.png"
+        text: 'Web Portal for Organisation/Member Management and Dashboard Services',
+        image: 'assets/images/WebPortal.png',
     },
     {
-        text: "Messaging Gateway for Integration with Government Applications",
-        image: "assets/images/Message.png"
+        text: 'Messaging Gateway for Integration with Government Applications',
+        image: 'assets/images/Message.png',
     },
     {
-        text: "App Settings for Privacy and security",
-        image: "assets/images/Security.webp"
-    }
+        text: 'App Settings for Privacy and security',
+        image: 'assets/images/Security.webp',
+    },
 ];
 
 function Features() {
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
     return (
-        <Box mt={10} mb={10}>
-            <Typography variant="h5" fontWeight="bold" gutterBottom sx={{ textAlign: "center" }}>
+        <div className="mt-16 mb-16 bg-gray-50 py-12">
+            <h5 className="text-4xl font-semibold text-center text-[#3D8E43] p-4">
                 Features
-            </Typography>
-            <Box sx={{ maxWidth: isMobile ? '100%' : '70%', mx: 'auto', px: 2 }}>
-                <Timeline position={isMobile ? "right" : "alternate"}>
-                    {roadmapData.map((item, index) => (
-                        <TimelineItem key={index}>
+            </h5>
 
-                            <TimelineOppositeContent sx={{ flex: isMobile ? 0 : 1, py: '12px' }} />
+            <div className="max-w-screen-xl mx-auto px-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    {roadmapData.map((item, index) => {
+                        const direction = index % 2 === 0 ? 'left' : 'right';
 
-                            <TimelineSeparator>
-                                <TimelineDot color="primary" />
-                                {index < roadmapData.length - 1 && <TimelineConnector />}
-                            </TimelineSeparator>
-
-                            <TimelineContent sx={{ py: '12px', px: 2 }}>
-                                <Paper elevation={3} sx={{ p: 2, width: isMobile ? '100%' : 'auto' }}>
-                                    <Box
-                                        // display="flex"
-                                        flexDirection={isMobile ? "column" : "row"}
-                                        alignItems="center"
-                                        gap={2}
-                                    >
-                                        <Box
-                                            component="img"
-                                            src={item.image}
-                                            alt="Feature"
-                                            sx={{
-                                                width: isMobile ? '100%' : "100%",
-                                                height: 'auto',
-                                                borderRadius: 2
-                                            }}
-                                        />
-                                        <Typography variant="body1">{item.text}</Typography>
-                                    </Box>
-                                </Paper>
-                            </TimelineContent>
-                        </TimelineItem>
-                    ))}
-                </Timeline>
-            </Box>
-        </Box>
+                        return (
+                            <motion.div
+                                key={index}
+                                custom={direction}
+                                variants={slideInVariant}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, amount: 0.2 }}
+                                className={`flex flex-col items-center bg-white p-6 rounded-xl shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl`}
+                            >
+                                <img
+                                    src={item.image}
+                                    alt="Feature"
+                                    className="w-full h-48 object-cover rounded-lg mb-4"
+                                />
+                                <p className="text-center text-lg text-gray-700">{item.text}</p>
+                            </motion.div>
+                        );
+                    })}
+                </div>
+            </div>
+        </div>
     );
 }
 

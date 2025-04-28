@@ -1,67 +1,59 @@
 import React from 'react';
-import { Box, Typography ,useMediaQuery, useTheme } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 function Footer() {
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-    return (
-        <div style={{ backgroundColor: '#f7f7f7', borderTop: '1px solid #ccc' }}>
-            <div className="col-md-12  py-12 " style={{display:isMobile?"auto":"flex" , padding:isMobile?"0 25px":"0 100px"}}>
-
-                <div className="col-md-8">
-                <div className="mt-3">
-                        <img
-                            src="assets/images/Digital_India.webp"
-                            alt="Digital India"
-                            style={{ width:isMobile?"30%": "12%" }}
-                        />
-                    </div>
-                    <br />
-                    <Typography variant="h5" fontWeight="bold" gutterBottom style={{paddingTop:isMobile?"5%":"0"}}>
-                        About
-                    </Typography>
-
-                    <p style={{ maxWidth: isMobile?"90%":'60%' }}>
-                        Sandes, an initiative by the Government of India under Atma Nirbhar Bharat, is a platform to facilitate government officials and citizens to securely exchange messages.
-                    </p>
-                    <div className="d-flex gap-3 mt-3">
-                        <a href="#"><FontAwesomeIcon icon={faLinkedin} size="2x" color="#0A66C2" /></a>
-                        <a href="#"><FontAwesomeIcon icon={faFacebook} size="2x" color="#3b5998" /></a>
-                        <a href="#"><FontAwesomeIcon icon={faTwitter} size="2x" color="#00acee" /></a>
-                    </div>
-                   
-                </div>
-
-                <div className="col-md-4" style={{paddingTop:isMobile?"10%":"5%"}}>
-                    <Typography variant="h5" fontWeight="bold" gutterBottom >
-                        Explore Sandes
-                    </Typography>
-
-                    <ul className="list-unstyled">
-                        <li><a href="#" className="text-decoration-none text-dark">Home</a></li>
-                        <li><a href="#" className="text-decoration-none text-dark">Features</a></li>
-                        <li><a href="#" className="text-decoration-none text-dark">Download the app</a></li>
-                    </ul>
-
-                    <Typography variant="h5" fontWeight="bold" gutterBottom  style={{paddingTop:isMobile?"10%":"0"}}>
-                        Contact Us
-                    </Typography>
-                    <ul className="list-unstyled mb-4" >
-                        <li><FontAwesomeIcon icon={faEnvelope} className="me-2" /> support-sandes@nic.in</li>
-                        <li><FontAwesomeIcon icon={faGlobe} className="me-2" /> www.nic.in</li>
-                    </ul>
-                </div>
-            </div>
-            {/* <div className="row mt-4"> */}
-            <div className="col-12 text-center" style={{ backgroundColor: '#e48f52', color: 'white', padding: '10px 0', fontSize: '1rem' , fontWeight:isMobile?"400":"700" }}>
-                Site Designed, Developed and Maintained by National Informatics Center, Ministry of Electronics and IT, Government of India
-            </div>
-            {/* </div> */}
+  return (
+    <div className="bg-gray-100 border-t border-gray-300">
+      <div className="flex flex-col md:flex-row py-12 px-4 md:px-24">
+        
+        <div className="md:w-2/3 flex flex-col items-start space-y-6">
+          <div className="mt-3">
+            <img
+              src="assets/images/Digital_India.webp"
+              alt="Digital India"
+              className="w-1/3 md:w-1/12"
+            />
+          </div>
+          <h5 className="text-xl font-bold pt-5 md:pt-0">About</h5>
+          <p className="max-w-[90%] md:max-w-[60%]">
+            Sandes, an initiative by the Government of India under Atma Nirbhar Bharat, is a platform to facilitate government officials and citizens to securely exchange messages.
+          </p>
+          <div className="flex gap-4 mt-3">
+            <a href="#" className="text-blue-600"><FontAwesomeIcon icon={faLinkedin} size="2x" /></a>
+            <a href="#" className="text-blue-800"><FontAwesomeIcon icon={faFacebook} size="2x" /></a>
+            <a href="#" className="text-blue-400"><FontAwesomeIcon icon={faTwitter} size="2x" /></a>
+          </div>
         </div>
-    );
+
+        <div className="md:w-1/3 flex flex-col items-start space-y-6 pt-10 md:pt-0">
+          <h5 className="text-xl font-bold">Explore Sandes</h5>
+          <ul className="list-none space-y-2">
+            <li><a href="#" className="text-dark hover:text-blue-600">Home</a></li>
+            <li><a href="#" className="text-dark hover:text-blue-600">Features</a></li>
+            <li><a href="#" className="text-dark hover:text-blue-600">Download the app</a></li>
+          </ul>
+
+          <h5 className="text-xl font-bold pt-6">Contact Us</h5>
+          <ul className="list-none space-y-2">
+            <li className="flex items-center">
+              <FontAwesomeIcon icon={faEnvelope} className="mr-2" />
+              support-sandes@nic.in
+            </li>
+            <li className="flex items-center">
+              <FontAwesomeIcon icon={faGlobe} className="mr-2" />
+              www.nic.in
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="bg-orange-500 text-white text-center py-3 text-sm md:text-base">
+        Site Designed, Developed and Maintained by National Informatics Center, Ministry of Electronics and IT, Government of India
+      </div>
+    </div>
+  );
 }
 
 export default Footer;

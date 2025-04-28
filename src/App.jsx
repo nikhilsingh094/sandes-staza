@@ -12,12 +12,14 @@ import {
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Dlinks from "./Pages/Dlinks/Dlinks";
 import APPInsights from "./Pages/APPInsights/APPInsights";
+import OrganizationOverview from "./components/Dashboard/OrganizationOverview";
 
 function App() {
   return (
     <Router>
       <Routes>
-      <Route path="/APPInsights" element={<APPInsights />} />
+        <Route path="/OrganizationOverview" element={<OrganizationOverview />} />
+        <Route path="/APPInsights" element={<APPInsights />} />
         <Route path="/Dlinks" element={<Dlinks />} />
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/LoginWeb" element={<Login />} />

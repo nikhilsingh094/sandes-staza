@@ -4,8 +4,9 @@ import Landing from '../../components/LandingPage/Landing'
 import Features from '../../components/LandingPage/Features'
 import About from '../../components/LandingPage/About'
 import Statistics from '../../components/LandingPage/Statistics'
-import LatestNews from '../../components/LandingPage/LatestNews'
+// import LatestNews from '../../components/LandingPage/LatestNews'
 import Footer from '../../components/LandingPage/Footer'
+import ConnectAndChat from '../../components/LandingPage/ConnectAndChat'
 
 function Home() {
     return (
@@ -16,7 +17,8 @@ function Home() {
                 <Features />
                 <About />
                 <Statistics />
-                <LatestNews />
+                {/* <LatestNews /> */}
+                <ConnectAndChat />
             </div>
             <Footer />
         </>

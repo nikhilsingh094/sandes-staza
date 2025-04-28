@@ -529,7 +529,7 @@ function Statistics() {
     return (
         <Box mt={10}>
             <Typography variant="h5" fontWeight="bold" gutterBottom sx={{ textAlign: "center" }}>
-                Sandes Statistics
+                <p className="text-3xl pb-3 text-[#3D8E61] font-semibold">Sandes Statistics</p>
             </Typography>
 
             <Grid container spacing={3}>
