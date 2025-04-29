@@ -157,12 +157,18 @@ function OrganizationOverview() {
                                         >
                                             <List>
                                                 <ListItem
-                                                    inductive onClick={() => handleMenuItemClick('Member wise status', row.id)}
+                                                    button
+                                                    component="a"
+                                                    href="/MemberPage"
+                                                    onClick={() => handleMenuItemClick('Member wise status', row.id)}
                                                 >
                                                     <ListItemText primary="Member wise status" />
                                                 </ListItem>
+
                                                 <ListItem
-                                                    button
+                                                     button
+                                                     component="a"
+                                                     href="/HeatMap"
                                                     onClick={() => handleMenuItemClick('Heat Map', row.id)}
                                                 >
                                                     <ListItemText primary="Heat Map based on chat activity" />

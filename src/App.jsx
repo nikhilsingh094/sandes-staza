@@ -14,11 +14,15 @@ import Dlinks from "./Pages/Dlinks/Dlinks";
 import APPInsights from "./Pages/APPInsights/APPInsights";
 import OrganizationOverview from "./components/Dashboard/OrganizationOverview";
 import OrganizationUnit from "./Pages/OrganizationUnit/OrganizationUnit";
+import MemberPage from "./components/Dashboard/MemberPage";
+import EmployeHeatMap from "./components/Dashboard/EmployeHeatMap";
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/MemberPage" element={<MemberPage />} />
+        <Route path="/HeatMap" element={<EmployeHeatMap />} />
         <Route path="/OrganizationUnit" element={<OrganizationUnit />} />
         <Route path="/OrganizationOverview" element={<OrganizationOverview />} />
         <Route path="/APPInsights" element={<APPInsights />} />
