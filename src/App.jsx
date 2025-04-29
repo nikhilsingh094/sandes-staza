@@ -13,11 +13,13 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import Dlinks from "./Pages/Dlinks/Dlinks";
 import APPInsights from "./Pages/APPInsights/APPInsights";
 import OrganizationOverview from "./components/Dashboard/OrganizationOverview";
+import OrganizationUnit from "./Pages/OrganizationUnit/OrganizationUnit";
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/OrganizationUnit" element={<OrganizationUnit />} />
         <Route path="/OrganizationOverview" element={<OrganizationOverview />} />
         <Route path="/APPInsights" element={<APPInsights />} />
         <Route path="/Dlinks" element={<Dlinks />} />
