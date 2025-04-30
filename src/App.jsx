@@ -16,11 +16,21 @@ import OrganizationOverview from "./components/Dashboard/OrganizationOverview";
 import OrganizationUnit from "./Pages/OrganizationUnit/OrganizationUnit";
 import MemberPage from "./components/Dashboard/MemberPage";
 import EmployeHeatMap from "./components/Dashboard/EmployeHeatMap";
+import Designation from "./Pages/Designation/Designation";
+import LoginManagement from "./Pages/LoginManagement/LoginManagement";
+import Searchmember from "./Pages/Searchmember/Searchmember";
+import GroupManagement from "./Pages/GroupManagement/GroupManagement";
+import ImportEmployees from "./Pages/ImportEmployees/ImportEmployees";
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/ImportEmployees" element={<ImportEmployees />} />
+        <Route path="/GroupManagement" element={<GroupManagement />} />
+        <Route path="/Searchmember" element={<Searchmember />} />
+        <Route path="/LoginManagement" element={<LoginManagement />} />
+        <Route path="/Designation" element={<Designation />} />
         <Route path="/MemberPage" element={<MemberPage />} />
         <Route path="/HeatMap" element={<EmployeHeatMap />} />
         <Route path="/OrganizationUnit" element={<OrganizationUnit />} />

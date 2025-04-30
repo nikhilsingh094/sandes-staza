@@ -117,81 +117,81 @@
 //                             + New
 //                         </button>
 
-//                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-//                             <div class="modal-dialog">
-//                                 <div class="modal-content" style={{ padding: "2%" }}>
-//                                     <div class="modal-header">
-//                                         {/* <h5 class="modal-title" id="exampleModalLabel">New Organization Unit [Ministry for POC]</h5> */}
-//                                         <Typography variant="h6" mb={2}>New Organization Unit [Ministry for POC]</Typography>
-//                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-//                                     </div>
-//                                     <form>
+                        // <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        //     <div class="modal-dialog">
+                        //         <div class="modal-content" style={{ padding: "2%" }}>
+                        //             <div class="modal-header">
+                        //                 {/* <h5 class="modal-title" id="exampleModalLabel">New Organization Unit [Ministry for POC]</h5> */}
+                        //                 <Typography variant="h6" mb={2}>New Organization Unit [Ministry for POC]</Typography>
+                        //                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        //             </div>
+                        //             <form>
 
-//                                         <Typography variant="h6" mb={2} mt={2} textAlign="center">Organization for POC</Typography>
+                        //                 <Typography variant="h6" mb={2} mt={2} textAlign="center">Organization for POC</Typography>
 
-//                                         <div className="row">
-//                                             <div className="col-md-6  mt-3">
-//                                                 <select class="form-select" aria-label="Default select example">
-//                                                     <option selected>Parent organization unit</option>
-//                                                     <option value="1">One</option>
-//                                                     <option value="2">Two</option>
-//                                                     <option value="3">Three</option>
-//                                                 </select>
-//                                             </div>
-//                                             <div className="col-md-6  mt-3">
-//                                                 <select class="form-select" aria-label="Default select example">
-//                                                     <option selected>Organization unit type</option>
-//                                                     <option value="1">One</option>
-//                                                     <option value="2">Two</option>
-//                                                     <option value="3">Three</option>
-//                                                 </select>
-//                                             </div>
-//                                             <div className="col-md-6  mt-3">
-//                                                 <select class="form-select" aria-label="Default select example">
-//                                                     <option selected>State</option>
-//                                                     <option value="1">One</option>
-//                                                     <option value="2">Two</option>
-//                                                     <option value="3">Three</option>
-//                                                 </select>
-//                                             </div>
-//                                             <div className="col-md-6  mt-3">
-//                                                 <select class="form-select" aria-label="Default select example">
-//                                                     <option selected>District</option>
-//                                                     <option value="1">One</option>
-//                                                     <option value="2">Two</option>
-//                                                     <option value="3">Three</option>
-//                                                 </select>
-//                                             </div>
-//                                             <div className="col-md-6 mt-3">
-//                                                 <input class="form-control" type="text" placeholder="O u code" aria-label="default input example" />
-//                                             </div>
+                        //                 <div className="row">
+                        //                     <div className="col-md-6  mt-3">
+                        //                         <select class="form-select" aria-label="Default select example">
+                        //                             <option selected>Parent organization unit</option>
+                        //                             <option value="1">One</option>
+                        //                             <option value="2">Two</option>
+                        //                             <option value="3">Three</option>
+                        //                         </select>
+                        //                     </div>
+                        //                     <div className="col-md-6  mt-3">
+                        //                         <select class="form-select" aria-label="Default select example">
+                        //                             <option selected>Organization unit type</option>
+                        //                             <option value="1">One</option>
+                        //                             <option value="2">Two</option>
+                        //                             <option value="3">Three</option>
+                        //                         </select>
+                        //                     </div>
+                        //                     <div className="col-md-6  mt-3">
+                        //                         <select class="form-select" aria-label="Default select example">
+                        //                             <option selected>State</option>
+                        //                             <option value="1">One</option>
+                        //                             <option value="2">Two</option>
+                        //                             <option value="3">Three</option>
+                        //                         </select>
+                        //                     </div>
+                        //                     <div className="col-md-6  mt-3">
+                        //                         <select class="form-select" aria-label="Default select example">
+                        //                             <option selected>District</option>
+                        //                             <option value="1">One</option>
+                        //                             <option value="2">Two</option>
+                        //                             <option value="3">Three</option>
+                        //                         </select>
+                        //                     </div>
+                        //                     <div className="col-md-6 mt-3">
+                        //                         <input class="form-control" type="text" placeholder="O u code" aria-label="default input example" />
+                        //                     </div>
 
-//                                             <div className="col-md-6  mt-3">
-//                                                 <input class="form-control" type="text" placeholder="O u name" aria-label="default input example" />
-//                                             </div>
+                        //                     <div className="col-md-6  mt-3">
+                        //                         <input class="form-control" type="text" placeholder="O u name" aria-label="default input example" />
+                        //                     </div>
 
-//                                             <div className="col-md-6 mt-3">
-//                                                 <input class="form-control" type="text" placeholder="Address" aria-label="default input example" />
-//                                             </div>
+                        //                     <div className="col-md-6 mt-3">
+                        //                         <input class="form-control" type="text" placeholder="Address" aria-label="default input example" />
+                        //                     </div>
 
-//                                             <div className="col-md-6  mt-3">
-//                                                 <input class="form-control" type="text" placeholder="Pin code" aria-label="default input example" />
-//                                             </div>
-//                                             <div className="col-md-6 mt-3">
-//                                                 <input class="form-control" type="text" placeholder="Landline" aria-label="default input example" />
-//                                             </div>
+                        //                     <div className="col-md-6  mt-3">
+                        //                         <input class="form-control" type="text" placeholder="Pin code" aria-label="default input example" />
+                        //                     </div>
+                        //                     <div className="col-md-6 mt-3">
+                        //                         <input class="form-control" type="text" placeholder="Landline" aria-label="default input example" />
+                        //                     </div>
 
-//                                             <div className="col-md-6  mt-3">
-//                                                 <input class="form-control" type="text" placeholder="Website" aria-label="default input example" />
-//                                             </div>
+                        //                     <div className="col-md-6  mt-3">
+                        //                         <input class="form-control" type="text" placeholder="Website" aria-label="default input example" />
+                        //                     </div>
 
-//                                         </div>
-//                                         <button type="submit" class="btn btn-primary m-3">Save</button>
-//                                         <button type="submit" class="btn btn-danger">Close</button>
-//                                     </form>
-//                                 </div>
-//                             </div>
-//                         </div>
+                        //                 </div>
+                        //                 <button type="submit" class="btn btn-primary m-3">Save</button>
+                        //                 <button type="submit" class="btn btn-danger">Close</button>
+                        //             </form>
+                        //         </div>
+                        //     </div>
+                        // </div>
 //                     </div>
 //                 </div>
 //                 {showSelect && (
@@ -434,6 +434,83 @@ function OrganizationUnitDash() {
                         <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             + New
                         </button>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content" style={{ padding: "2%" }}>
+                                    <div class="modal-header">
+                                        {/* <h5 class="modal-title" id="exampleModalLabel">New Organization Unit [Ministry for POC]</h5> */}
+                                        <Typography variant="h6" mb={2}>New Organization Unit [Ministry for POC]</Typography>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form>
+
+                                        <Typography variant="h6" mb={2} mt={2} textAlign="center">Organization for POC</Typography>
+
+                                        <div className="row">
+                                            <div className="col-md-6  mt-3">
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected>Parent organization unit</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                            <div className="col-md-6  mt-3">
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected>Organization unit type</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                            <div className="col-md-6  mt-3">
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected>State</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                            <div className="col-md-6  mt-3">
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected>District</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                            <div className="col-md-6 mt-3">
+                                                <input class="form-control" type="text" placeholder="O u code" aria-label="default input example" />
+                                            </div>
+
+                                            <div className="col-md-6  mt-3">
+                                                <input class="form-control" type="text" placeholder="O u name" aria-label="default input example" />
+                                            </div>
+
+                                            <div className="col-md-6 mt-3">
+                                                <input class="form-control" type="text" placeholder="Address" aria-label="default input example" />
+                                            </div>
+
+                                            <div className="col-md-6  mt-3">
+                                                <input class="form-control" type="text" placeholder="Pin code" aria-label="default input example" />
+                                            </div>
+                                            <div className="col-md-6 mt-3">
+                                                <input class="form-control" type="text" placeholder="Landline" aria-label="default input example" />
+                                            </div>
+
+                                            <div className="col-md-6  mt-3">
+                                                <input class="form-control" type="text" placeholder="Website" aria-label="default input example" />
+                                            </div>
+
+                                        </div>
+                                        <button type="submit" class="btn btn-primary m-3">Save</button>
+                                        <button type="submit" class="btn btn-danger">Close</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 

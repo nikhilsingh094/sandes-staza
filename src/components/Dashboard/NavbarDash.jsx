@@ -60,7 +60,19 @@ export default function NavbarDash() {
               handleOrgManagementClick();
             } else if (item === "Organization Units") {
               window.location.href = "/OrganizationUnit";
-            } else {
+            } else if (item === "Designations") {
+              window.location.href = "/Designation";
+            } else if (item === "Members") {
+              window.location.href = "/LoginManagement";
+            } else if (item === "Search/Locate Member") {
+              window.location.href = "/Searchmember";
+            }
+            else if (item === "Groups") {
+              window.location.href = "/GroupManagement";
+            } else if (item === "Import Employees") {
+              window.location.href = "/ImportEmployees";
+            }
+            else {
               handleMenuClose();
             }
           }}
