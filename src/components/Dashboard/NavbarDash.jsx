@@ -56,7 +56,8 @@ export default function NavbarDash() {
         <MenuItem
           key={item}
           onClick={() => {
-            if (item === "Organization Management") {
+            if (item === "Organization Managemen") {
+              // Organization Management
               handleOrgManagementClick();
             } else if (item === "Organization Units") {
               window.location.href = "/OrganizationUnit";
@@ -100,7 +101,31 @@ export default function NavbarDash() {
         "Logged in as 9984261451",
         "Logout"
       ].map((item) => (
-        <MenuItem key={item} onClick={handleMenuClose}>{item}</MenuItem>
+        // <MenuItem key={item} onClick={handleMenuClose}>{item}</MenuItem>
+        <MenuItem
+        key={item}
+        onClick={() => {
+          if (item === "Sign in as MINISTRY ADMIN Ministry for POC") {
+            window.location.href = "/LoginAdmin";
+          } else if (item === "Signed in as O ADMIN Organization for POC") {
+            window.location.href = "/LoginAdmin";
+          } else if (item === "Sign in as OU ADMIN OU for POC") {
+            window.location.href = "/LoginAdmin";
+          } else if (item === "Logout") {
+            window.location.href = "/";
+          }
+          // else if (item === "Groups") {
+          //   window.location.href = "/GroupManagement";
+          // } else if (item === "Import Employees") {
+          //   window.location.href = "/ImportEmployees";
+          // }
+          else {
+            handleMenuClose();
+          }
+        }}
+      >
+        {item}
+      </MenuItem>
       ))}
     </Menu>
   );

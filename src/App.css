@@ -1,4 +1,6 @@
-.css-1tsblz7-MuiTypography-root-MuiTimelineOppositeContent-root{
+@plugin "daisyui";
+
+.css-1tsblz7-MuiTypography-root-MuiTimelineOppositeContent-root {
     display: none;
 }
 
@@ -6,10 +8,10 @@
     max-width: 100% !important;
 }
 
-.css-19do60a-MuiDialog-container{
+.css-19do60a-MuiDialog-container {
     height: auto !important;
 }
 
-.modal-dialog{
+.modal-dialog {
     max-width: 90%;
 }

@@ -26,7 +26,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/ImportEmployees" element={<ImportEmployees />} />
+        {/* <Route path="/ImportEmployees" element={<ImportEmployees />} />
         <Route path="/GroupManagement" element={<GroupManagement />} />
         <Route path="/Searchmember" element={<Searchmember />} />
         <Route path="/LoginManagement" element={<LoginManagement />} />
@@ -36,7 +36,7 @@ function App() {
         <Route path="/OrganizationUnit" element={<OrganizationUnit />} />
         <Route path="/OrganizationOverview" element={<OrganizationOverview />} />
         <Route path="/APPInsights" element={<APPInsights />} />
-        <Route path="/Dlinks" element={<Dlinks />} />
+        <Route path="/Dlinks" element={<Dlinks />} /> */}
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/LoginWeb" element={<Login />} />
         <Route path="/LoginAdmin" element={<LoginAdmin />} />

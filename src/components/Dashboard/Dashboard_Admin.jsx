@@ -50,7 +50,7 @@ function Dashboard_Admin() {
                     <div className="dash-top-btn" >
                         <Button variant="contained" href='/APPInsights' style={{ marginRight: "10px" }} >APP INSIGHTS</Button>
                         <Button variant="contained" onClick={toggleDrawer(true)}><FontAwesomeIcon icon={faEnvelope} /> BROADCAST MESSAGE</Button>
-                        <Drawer anchor="top" open={open} onClose={toggleDrawer(false)}>
+                        {/* <Drawer anchor="top" open={open} onClose={toggleDrawer(false)}>
                             <Box
                                 component="form"
                                 onSubmit={handleSubmit}
@@ -60,7 +60,6 @@ function Dashboard_Admin() {
                                     Fill in your info
                                 </Typography>
 
-                                {/* Dropdown */}
                                 <FormControl fullWidth margin="normal">
                                     <InputLabel id="demo-simple-select-label">Age</InputLabel>
                                     <Select
@@ -76,7 +75,6 @@ function Dashboard_Admin() {
                                     </Select>
                                 </FormControl>
 
-                                {/* Text Area */}
                                 <TextField
                                     fullWidth
                                     margin="normal"
@@ -86,7 +84,6 @@ function Dashboard_Admin() {
                                     rows={4}
                                 />
 
-                                {/* Checkboxes */}
                                 <Box display="flex" gap={2} mt={2}>
                                     <FormControl>
                                         <label>
@@ -100,7 +97,6 @@ function Dashboard_Admin() {
                                     </FormControl>
                                 </Box>
 
-                                {/* Image Upload */}
                                 <Box mt={2}>
                                     <Button variant="outlined" component="label">
                                         Upload Image
@@ -122,14 +118,12 @@ function Dashboard_Admin() {
                                     </Button>
                                 </Box>
 
-                                {/* Show Image Preview */}
                                 {imagePreview && (
                                     <Box mt={2}>
                                         <img src={imagePreview} alt="Preview" style={{ width: '100%', maxHeight: 200, objectFit: 'contain' }} />
                                     </Box>
                                 )}
 
-                                {/* Read-only Field */}
                                 <TextField
                                     fullWidth
                                     margin="normal"
@@ -139,8 +133,6 @@ function Dashboard_Admin() {
                                         readOnly: true,
                                     }}
                                 />
-
-                                {/* Buttons */}
                                 <Box display="flex" justifyContent="space-between" mt={3}>
                                     <Button variant="outlined" onClick={toggleDrawer(false)}>Cancel</Button>
                                     <Button variant="contained" color="primary">Send Email</Button>
@@ -148,7 +140,7 @@ function Dashboard_Admin() {
                                 </Box>
                             </Box>
 
-                        </Drawer>
+                        </Drawer> */}
                     </div>
                 </div>
 

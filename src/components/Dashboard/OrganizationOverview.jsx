@@ -100,7 +100,7 @@ function OrganizationOverview() {
     return (
         <>
             <NavbarDash />
-            <div className="m-3">
+            <div className="m-3" style={{ height: '70vh' }}>
                 <div className="overdata" style={{ justifyContent: 'space-between', display: 'flex' }}>
                     <Typography variant="h5" align="center" gutterBottom>
                         Organization for POC - OU Wise Statistics
