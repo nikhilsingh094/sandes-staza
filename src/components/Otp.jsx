@@ -58,7 +58,7 @@ function Otp() {
         {isOtpComplete && (
           <Button
             variant="outline"
-            className="cursor-pointer bg-[#7DD0AF] px-15 text-white"
+            className="cursor-pointer bg-[#7DD0AF] px-16 text-white"
           >
             Verify
           </Button>
