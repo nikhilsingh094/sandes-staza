@@ -31,14 +31,6 @@ function About() {
           <p className="text-lg md:text-xl text-gray-700 font-medium mt-4 leading-relaxed">
             Enjoy end-to-end encrypted messages, audio-video calls, and file sharing. Managed by onboarded organization admins, Sandes ensures robust user management and is accessible to all registered users via the web portal.
           </p>
-          <div className="mt-8">
-            <a
-              href="#learn-more"
-              className="inline-block px-8 py-3 bg-[#36904A] text-white font-semibold rounded-full shadow-lg hover:bg-[#2a7038] transition-colors duration-300"
-            >
-              Learn More
-            </a>
-          </div>
         </div>
       </div>
     </div>

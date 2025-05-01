@@ -19,11 +19,11 @@ const slideInVariant = {
 
 const roadmapData = [
     {
-        text: 'Hosted at government infrastructure and governed by rules and regulations of GOI.',
+        text: 'Hosted at Government infrastructure and governed by rules and regulations of GOI.',
         image: 'assets/images/Hosted.jpg',
     },
     {
-        text: 'Data and Strategic control with Government.',
+        text: 'Strategic control with Government.',
         image: 'assets/images/Data_store.png',
     },
     {
@@ -31,7 +31,7 @@ const roadmapData = [
         image: 'assets/images/WebPortal.png',
     },
     {
-        text: 'Messaging Gateway for Integration with Government Applications',
+        text: 'Messaging Gateway for Integration with eGov Applications',
         image: 'assets/images/Message.png',
     },
     {

@@ -1,59 +1,127 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faGlobe } from '@fortawesome/free-solid-svg-icons';
-import { faLinkedin, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import React from "react";
+import { FaEnvelope, FaGlobe } from "react-icons/fa";
+import ashoklogo from "../../assets/ashoklogo.png"
+import sandes_logo from "../../assets/sandes_logo.png";
+import nic_logo from "../../assets/nic.png"
 
-function Footer() {
+const Footer = () => {
   return (
-    <div className="bg-gray-100 border-t border-gray-300">
-      <div className="flex flex-col md:flex-row py-12 px-4 md:px-24">
-        
-        <div className="md:w-2/3 flex flex-col items-start space-y-6">
-          <div className="mt-3">
-            <img
-              src="assets/images/Digital_India.webp"
-              alt="Digital India"
-              className="w-1/3 md:w-1/12"
-            />
+    <>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 240"><path fill="#037fa1" fill-opacity="1" d="M0,96L1440,288L1440,320L0,320Z"></path></svg>
+    <footer
+      className="footer text-white pt-5 pb-4"
+      style={{ backgroundColor: "#037fa1", border: "none" }}
+    >
+      <div className="container">
+        <div className="row">
+          {/* Column 1: Logos and Description */}
+          <div className="col-md-3 col-sm-6 mb-4">
+            <a
+              className="navbar-brand d-inline-flex align-items-center"
+              href="/"
+              aria-label="Sandes"
+            >
+              <img
+                src={ashoklogo}
+                style={{ width: "36px" }}
+                alt="Ashoka Logo"
+              />
+              <img
+                src={sandes_logo}
+                style={{ width: "54px", marginLeft: "16px" }}
+                alt="Sandes Logo"
+              />
+            </a>
+            <a
+              className="d-inline-flex align-items-center mt-3"
+              href="/"
+              aria-label="Sandes"
+              style={{ backgroundColor: "white" }}
+            >
+              <img
+                src={nic_logo}
+                style={{ width: "150px" }}
+                alt="NIC Bilingual Logo"
+              />
+            </a>
           </div>
-          <h5 className="text-xl font-bold pt-5 md:pt-0">About</h5>
-          <p className="max-w-[90%] md:max-w-[60%]">
-            Sandes, an initiative by the Government of India under Atma Nirbhar Bharat, is a platform to facilitate government officials and citizens to securely exchange messages.
-          </p>
-          <div className="flex gap-4 mt-3">
-            <a href="#" className="text-blue-600"><FontAwesomeIcon icon={faLinkedin} size="2x" /></a>
-            <a href="#" className="text-blue-800"><FontAwesomeIcon icon={faFacebook} size="2x" /></a>
-            <a href="#" className="text-blue-400"><FontAwesomeIcon icon={faTwitter} size="2x" /></a>
+
+          {/* Column 2: Features */}
+          <div className="col-md-3 col-sm-6 mb-4">
+            <h5 className="text-uppercase mb-3">Features</h5>
+            <ul className="list-unstyled">
+              <li><a href="#" className="text-white-50">Profile Visiting</a></li>
+              <li><a href="#" className="text-white-50">Group Management</a></li>
+              <li><a href="#" className="text-white-50">Broadcast</a></li>
+              <li><a href="#" className="text-white-50">Dashboard</a></li>
+            </ul>
+          </div>
+
+          {/* Column 3: Quick Links */}
+          <div className="col-md-3 col-sm-6 mb-4">
+            <h5 className="text-uppercase mb-3">Quick Links</h5>
+            <ul className="list-unstyled">
+              <li>
+                <a href="#" target="_blank" rel="noopener noreferrer" className="text-white-50">
+                  QRG - Android [3MB]
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank" rel="noopener noreferrer" className="text-white-50">
+                  QRG - iOS [2.1MB]
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank" rel="noopener noreferrer" className="text-white-50">
+                  Android Video (English)
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank" rel="noopener noreferrer" className="text-white-50">
+                  Android Video (Hindi)
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank" rel="noopener noreferrer" className="text-white-50">
+                  iOS Video (English)
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 4: Contact Info */}
+          <div className="col-md-3 col-sm-6 mb-4">
+            <h5 className="text-uppercase mb-3">Contact Us</h5>
+            <div className="text-white">
+              <p className="mb-2" style={{ color: "white" }}>
+                <a href="mailto:support-sandes@nic.in" className="text-white text-decoration-none">
+                  <FaEnvelope className="me-2" /> support-sandes@nic.in
+                </a>
+              </p>
+              <p>
+                <FaGlobe className="me-2" />
+                <a
+                  href="https://www.nic.in"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white text-decoration-none"
+                >
+                  www.nic.in
+                </a>
+              </p>
+            </div>
           </div>
         </div>
 
-        <div className="md:w-1/3 flex flex-col items-start space-y-6 pt-10 md:pt-0">
-          <h5 className="text-xl font-bold">Explore Sandes</h5>
-          <ul className="list-none space-y-2">
-            <li><a href="#" className="text-dark hover:text-blue-600">Home</a></li>
-            <li><a href="#" className="text-dark hover:text-blue-600">Features</a></li>
-            <li><a href="#" className="text-dark hover:text-blue-600">Download the app</a></li>
-          </ul>
-
-          <h5 className="text-xl font-bold pt-6">Contact Us</h5>
-          <ul className="list-none space-y-2">
-            <li className="flex items-center">
-              <FontAwesomeIcon icon={faEnvelope} className="mr-2" />
-              support-sandes@nic.in
-            </li>
-            <li className="flex items-center">
-              <FontAwesomeIcon icon={faGlobe} className="mr-2" />
-              www.nic.in
-            </li>
-          </ul>
+        {/* Divider & Copyright */}
+        <hr className="my-4 border-light" />
+        <div className="text-center text-white-50 small">
+          © 2025 Sandes, a product of NIC. All rights reserved.
         </div>
       </div>
-
-      <div className="bg-orange-500 text-white text-center py-3 text-sm md:text-base">
-        Site Designed, Developed and Maintained by National Informatics Center, Ministry of Electronics and IT, Government of India
-      </div>
-    </div>
+    </footer>
+    </>
   );
-}
+};
 
 export default Footer;

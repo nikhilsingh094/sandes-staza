@@ -59,8 +59,8 @@ function Login() {
           Start Using Sandes on Web
         </h1>
         <p className="text-base sm:text-lg font-medium text-blue-950">
-          Enhance your communication with faster access and clear calling via
-          the Sandes app
+          Enhance your communication with faster access via
+          Sandes app
         </p>
       </div>
 

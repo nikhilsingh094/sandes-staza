@@ -3,8 +3,9 @@ import sandes_logo from "../../assets/sandes_logo.png";
 import ashoklogo from "../../assets/ashoklogo.png";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { RxCross2 } from "react-icons/rx";
-import { Button } from "@mui/material";
+
 import { Link } from 'react-router-dom';
+import { Button } from "../ui/button";
 
 
 
@@ -34,23 +35,21 @@ function Navbar() {
             Features
           </p>
           <p className="text-xl font-semibold text-[#168A43] cursor-pointer hover:text-gray-600">
-            Latest News
+            About
           </p>
         </div>
         <div className="hidden md:flex items-center gap-4">
-          <Link
-            to="/LoginAdmin"
-            className="block w-full text-left btn btn-outline btn-success bg-transparent text-[#168A43] hover:text-gray-500 mt-2"
-            style={{width:"130px"}}
-          >
-            Sandes Admin
+         
+
+          <Link to = "/LoginAdmin">
+            <Button className="border-green-300 border-1 bg-transparent text-[#168A43] hover:text-green-500 cursor-pointer hover:bg-transparent">
+              Sandes Portal
+            </Button>
           </Link>
-          <Link
-            to="/LoginWeb"
-            className="block w-full text-left btn btn-outline btn-success bg-transparent text-[#168A43] hover:text-gray-500 mt-2"
-            style={{width:"120px"}}
-          >
+          <Link to ="/LoginWeb">
+            <Button className="border-green-300 border-1 bg-transparent text-[#168A43] hover:text-green-500 cursor-pointer hover:bg-transparent">
             Sandes Web
+            </Button>
           </Link>
 
         </div>
@@ -73,17 +72,12 @@ function Navbar() {
           <p className="text-lg font-semibold text-[#168A43] cursor-pointer hover:text-gray-600">
             Latest News
           </p>
-          {/* <Link to="/LoginAdmin"> */}
-          {/* <Button.a href="/LoginAdmin" className="block w-full text-left btn btn-outline btn-success bg-transparent text-[#168A43] hover:text-gray-500 mt-2">
-            Sandes Portal
-          </Button.a> */}
           <Link
             to="/LoginAdmin"
             className="block w-full text-left btn btn-outline btn-success bg-transparent text-[#168A43] hover:text-gray-500 mt-2"
           >
             Sandes Portal
           </Link>
-          {/* </Link> */}
           <Link
             to="/LoginWeb"
             className="block w-full text-left btn btn-outline btn-success bg-transparent text-[#168A43] hover:text-gray-500 mt-2"

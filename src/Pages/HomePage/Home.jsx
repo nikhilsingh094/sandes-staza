@@ -11,7 +11,7 @@ import ConnectAndChat from '../../components/LandingPage/ConnectAndChat'
 function Home() {
     return (
         <>
-            <div className="home_comp" style={{ padding: "2% 4%" }}>
+            <div className="home_comp" style={{ padding: "0% 4%" }}>
                 <Navbar />
                 <Landing />
                 <Features />
