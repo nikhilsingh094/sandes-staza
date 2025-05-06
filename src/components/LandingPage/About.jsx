@@ -26,10 +26,10 @@ function About() {
             Discover Sandes
           </h1>
           <p className="text-lg md:text-xl text-gray-700 font-medium leading-relaxed">
-            Sandes, proudly launched under India's <span className="font-semibold text-[#36904A]">Atma Nirbhar Bharat</span> initiative, is a secure messaging platform empowering government officials and citizens. With seamless integration into eGov applications, Sandes enables efficient G2C, C2G, and G2G communication at your fingertips.
+          Sandes, an initiative of Atma Nirbhar Bharat under the Digital India Programme, offers an open source based, secure and indigenous instant messaging platform to facilitate G2G, G2C and C2G communication. Sandes is securely hosted on Government infrastructure and thus the strategic control lies with the Govt. The app is available on Google Play Store and Apple App Store for anyone to download. 
           </p>
           <p className="text-lg md:text-xl text-gray-700 font-medium mt-4 leading-relaxed">
-            Enjoy end-to-end encrypted messages, audio-video calls, and file sharing. Managed by onboarded organization admins, Sandes ensures robust user management and is accessible to all registered users via the web portal.
+          Sandes is governed by the Privacy Policy and Data Retention policy as per Govt. requirements. Sandes is based on security first principle and offers end to end encrypted communication. Platform stores only metadata so actual message can’t be reproduced. Sandes has also implemented the originator’s traceability. 
           </p>
         </div>
       </div>

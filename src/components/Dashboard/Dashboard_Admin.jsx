@@ -15,6 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Link } from 'react-router-dom';
+import "./Dashboard.css";
 
 function Dashboard_Admin() {
     const [open, setOpen] = useState(false);
@@ -48,8 +49,8 @@ function Dashboard_Admin() {
                         Chat Statistics
                     </Typography>
                     <div className="dash-top-btn" >
-                        <Button variant="contained" href='/APPInsights' style={{ marginRight: "10px" }} >APP INSIGHTS</Button>
-                        <Button variant="contained" onClick={toggleDrawer(true)}><FontAwesomeIcon icon={faEnvelope} /> BROADCAST MESSAGE</Button>
+                        <Button className="Dashbtn" variant="contained" href='/APPInsights' style={{ marginRight: "10px" }} >APP INSIGHTS</Button>
+                        <Button className="Dashbtn" variant="contained" onClick={toggleDrawer(true)}> <FontAwesomeIcon icon={faEnvelope} /> BROADCAST MESSAGE</Button>
                         {/* <Drawer anchor="top" open={open} onClose={toggleDrawer(false)}>
                             <Box
                                 component="form"
@@ -144,33 +145,53 @@ function Dashboard_Admin() {
                     </div>
                 </div>
 
+
                 <div className="col-md-3 mt-3">
-                    <div class="card" style={{ width: "100%" }}>
-                        <Link to="/OrganizationOverview">
-                        <div class="card-body d-flex">
-                            <FontAwesomeIcon icon={faCube} fontSize="65" /> <p class="card-text ml-4">Organizations Units <br /><strong style={{ fontSize: "30px" }}>2</strong></p>
-                        </div>
+                    <div className="card zoom-card" style={{ width: "100%" }}>
+                        <Link to="/OrganizationOverview" style={{ textDecoration: "none", color: "inherit" }}>
+                            <div className="card-body d-flex">
+                                <FontAwesomeIcon icon={faCube} fontSize="65" />
+                                <p className="card-text ml-4">
+                                    Organizations Units <br />
+                                    <strong style={{ fontSize: "30px" }}>2</strong>
+                                </p>
+                            </div>
                         </Link>
                     </div>
                 </div>
+
                 <div className="col-md-3 mt-3">
-                    <div class="card" style={{ width: "100%" }}>
-                        <div class="card-body d-flex">
-                            <FontAwesomeIcon icon={faUsersLine} fontSize="65" /> <p class="card-text ml-4">Organizations Units <br /><strong style={{ fontSize: "30px" }}>37</strong></p>
+                    <div className="card zoom-card" style={{ width: "100%" }}>
+                        <div className="card-body d-flex">
+                            <FontAwesomeIcon icon={faUsersLine} fontSize="65" />
+                            <p className="card-text ml-4">
+                                Onboarded Users <br />
+                                <strong style={{ fontSize: "30px" }}>37</strong>
+                            </p>
                         </div>
                     </div>
                 </div>
+
                 <div className="col-md-3 mt-3">
-                    <div class="card" style={{ width: "100%" }}>
-                        <div class="card-body d-flex">
-                            <FontAwesomeIcon icon={faSquareCheck} fontSize="65" /> <p class="card-text ml-4">Organizations Units <br /><strong style={{ fontSize: "30px" }}>25</strong></p>
+                    <div className="card zoom-card" style={{ width: "100%" }}>
+                        <div className="card-body d-flex">
+                            <FontAwesomeIcon icon={faSquareCheck} fontSize="65" />
+                            <p className="card-text ml-4">
+                                Registered Users <br />
+                                <strong style={{ fontSize: "30px" }}>25</strong>
+                            </p>
                         </div>
                     </div>
                 </div>
+
                 <div className="col-md-3 mt-3">
-                    <div class="card" style={{ width: "100%" }}>
-                        <div class="card-body d-flex">
-                            <FontAwesomeIcon icon={faChartLine} fontSize="65" /> <p class="card-text ml-4">Organizations Units <br /><strong style={{ fontSize: "30px" }}>847</strong></p>
+                    <div className="card zoom-card" style={{ width: "100%" }}>
+                        <div className="card-body d-flex">
+                            <FontAwesomeIcon icon={faChartLine} fontSize="65" />
+                            <p className="card-text ml-4">
+                                Message Count <br />
+                                <strong style={{ fontSize: "30px" }}>847</strong>
+                            </p>
                         </div>
                     </div>
                 </div>

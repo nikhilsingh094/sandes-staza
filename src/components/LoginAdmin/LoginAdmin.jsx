@@ -1,94 +1,159 @@
 import { Typography } from "@mui/material";
-import { Button } from "antd";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
 export default function LoginAdmin_Page() {
   const navigate = useNavigate();
-  const [emailMobile, setEmailMobile] = useState("")
-  const [otp, setOTP] = useState("")
-  const [otpInputShow, setOtpInputShow] = useState(false)
 
-  const Login_by_number = async () => {
-    try {
-      if (emailMobile != "") {
-        setOtpInputShow(true)
-      }
-    } catch (error) {
-      console.log("Something error in Login_by_number ", error);
+  const [number, setNumber] = useState("");
+  const [err, setErr] = useState({});
+  const [showOtp, setShowOtp] = useState(false);
+  const otp_length = 5;
+  const [newInput, setNewInput] = useState(new Array(otp_length).fill(""));
+  const inputRef = useRef([]);
 
+  const loginHandler = async (e) => {
+    e.preventDefault();
+    const trimmedNumber = number.trim();
+    let validationErrors = {};
+
+    if (!trimmedNumber || !/^\d{10}$/.test(trimmedNumber)) {
+      validationErrors.number = "Please enter a valid 10-digit phone number";
     }
-  }
 
-  const OTP_Verification = async () => {
-    try {
-
-
-      if (otp != "") {
-        toast.success("Login Successful !!")
-        navigate('/Dashboard');
-        console.log("dsfbdsb");
-      }
-    } catch (error) {
-      console.log("Something error in OTP_Verification ", error);
-
+    if (Object.keys(validationErrors).length > 0) {
+      setErr(validationErrors);
+      return;
     }
-  }
+
+    setErr({ number: "" });
+    setShowOtp(true);
+
+    try {
+      // Replace with your real API call
+      // const res = await axios.post("your-api-url", { number: trimmedNumber });
+      setNumber("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (showOtp) {
+      inputRef.current[0]?.focus();
+    }
+  }, [showOtp]);
+
+  const handleInput = (value, index) => {
+    if (isNaN(value)) return;
+
+    const newVal = value.trim();
+    const newArr = [...newInput];
+    newArr[index] = newVal.slice(-1);
+    setNewInput(newArr);
+
+    if (newVal && index < otp_length - 1) {
+      inputRef.current[index + 1]?.focus();
+    }
+  };
+
+  const handleBack = (e, index) => {
+    if (!e.target.value && e.key === "Backspace" && index > 0) {
+      inputRef.current[index - 1]?.focus();
+    }
+  };
+
+  const OTP_Verification = () => {
+    const enteredOtp = newInput.join("");
+
+    if (enteredOtp.length === otp_length) {
+      // Replace this logic with actual OTP verification if needed
+      toast.success("Login Successful !!");
+      navigate('/Dashboard');
+    } else {
+      toast.error("Invalid OTP");
+    }
+  };
+
+  const isOtpComplete = newInput.every(item => item !== "");
 
   return (
-    <>
-      <div className="col-md-12" >
-        <div className="col-md-6" style={{ padding: "10%", margin: "auto" }}>
-          <div className="admin_form" style={{ border: "1px solid", padding: "5%", borderRadius: "10px" }}>
-            <div className="logo_img" style={{ textAlign: "-webkit-center" }}>
-              <img src="assets/images/sandes_logo.png" width="20%" alt="" />
-            </div>
-            <Typography variant="h5" fontWeight="bold" gutterBottom textAlign="center">
-              Sandes Authentication Admin Login
-            </Typography>
-
-            <form>
-              {otpInputShow === true ? <></> :
-                <>
-                  <p style={{ color: "green", textAlign: "center" }}>Please provide email/mobile registered in SANDES </p>
-                  <br />
-                  <div class="mb-3">
-                    <label for="exampleInputEmailMobile" class="form-label">Email/Mobile</label>
-                    <input type="text" class="form-control" onChange={(e) => setEmailMobile(e.target.value)} id="exampleInputEmailMobile" aria-describedby="emailmobileHelp" />
-                  </div>
-                  <div className="button-submit-cancle" style={{ textAlign: "center" }}>
-                    <button className="btn btn-primary mr-2" onClick={(e) => { e.preventDefault(); Login_by_number(); }}>
-                      Submit
-                    </button>
-                    <button class="btn btn-danger">Cancle</button>
-                  </div>
-                </>}
-              {otpInputShow === true ?
-                <>
-                  <p style={{ color: "green", textAlign: "center" }}>Please Provide OTP </p>
-                  <br />
-                  <div class="mb-3">
-                    <label for="otp" class="form-label">OTP</label>
-                    <input type="text" class="form-control" id="otp" onChange={(e) => setOTP(e.target.value)} aria-describedby="otphelp" />
-                  </div>
-                  <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                  </div>
-                  <div className="button-submit-cancle" style={{ textAlign: "center" }}>
-                    <Button class="btn btn-primary mr-2" style={{ backgroundColor: "green", marginRight: "10px" }} onClick={() => OTP_Verification()} >Submit</Button>
-                    <Button class="btn btn-danger">Cancle</Button>
-                  </div>
-                </> : <></>
-              }
-            </form>
+    <div
+      className="min-h-screen w-full px-4 py-8 flex flex-col items-center"
+      style={{
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        overflowX: "hidden",
+      }}
+    >
+      <div className="w-full max-w-screen-sm mt-8 p-6 bg-white border border-[#168943] shadow-2xl rounded-lg text-center space-y-4">
+        <div className="admin_form" style={{ border: "1px solid", padding: "5%", borderRadius: "10px" }}>
+          <div className="logo_img" style={{ textAlign: "-webkit-center" }}>
+            <img src="assets/images/sandes_logo.png" width="15%" alt="Logo" />
           </div>
+          <Typography variant="h5" fontWeight="bold" gutterBottom textAlign="center">
+            Sandes Authentication Admin Login
+          </Typography>
 
+          {showOtp ? (
+            <div className="flex justify-center flex-col gap-4 items-center">
+              <div className="bg-[#7DD0AF] p-8 rounded-2xl shadow-lg">
+                <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
+                  Enter OTP
+                </h2>
+                <div className="flex space-x-4">
+                  {newInput.map((item, index) => (
+                    <input
+                      ref={(input) => (inputRef.current[index] = input)}
+                      key={index}
+                      type="text"
+                      maxLength="1"
+                      value={newInput[index]}
+                      onChange={(e) => handleInput(e.target.value, index)}
+                      onKeyUp={(e) => handleBack(e, index)}
+                      className="w-12 h-12 text-center text-xl font-medium text-gray-800 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
+                      placeholder="-"
+                    />
+                  ))}
+                </div>
+              </div>
+              <div>
+                {isOtpComplete && (
+                  <Button onClick={OTP_Verification} className="w-full sm:w-auto cursor-pointer bg-[#7DD0AF] font-semibold">
+                    Verify
+                  </Button>
+                )}
+              </div>
+            </div>
+          ) : (
+            <>
+              <h1 className="text-xl sm:text-2xl font-semibold text-blue-950 mb-3">
+                Enter your phone number
+              </h1>
+              <form onSubmit={loginHandler} className="space-y-4">
+                <Input
+                  value={number}
+                  onChange={(e) => setNumber(e.target.value)}
+                  className="text-gray-700 font-semibold"
+                  placeholder="Enter your phone number"
+                />
+                {err.number && (
+                  <span className="text-red-500 font-medium text-sm block">
+                    {err.number}
+                  </span>
+                )}
+                <Button type="submit" className="w-full sm:w-auto cursor-pointer bg-[#7DD0AF] font-semibold">
+                  Generate OTP
+                </Button>
+              </form>
+            </>
+          )}
         </div>
-
       </div>
-    </>
+    </div>
   );
 }

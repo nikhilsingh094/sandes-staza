@@ -42,12 +42,12 @@ function Navbar() {
          
 
           <Link to = "/LoginAdmin">
-            <Button className="border-green-300 border-1 bg-transparent text-[#168A43] hover:text-green-500 cursor-pointer hover:bg-transparent">
+            <Button className="border-[#188941] border-1 bg-transparent text-[#168A43] hover:text-green-500 cursor-pointer hover:bg-transparent">
               Sandes Portal
             </Button>
           </Link>
           <Link to ="/LoginWeb">
-            <Button className="border-green-300 border-1 bg-transparent text-[#168A43] hover:text-green-500 cursor-pointer hover:bg-transparent">
+            <Button className="border-[#188941] border-1 bg-transparent text-[#168A43] hover:text-green-500 cursor-pointer hover:bg-transparent">
             Sandes Web
             </Button>
           </Link>
