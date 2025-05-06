@@ -1,6 +1,7 @@
 import { LogOut, Plus, Search } from "lucide-react";
 import React, { useRef } from "react";
 import EditProfile from "./EditProfile";
+import chatbg from "../../assets/chat-bg.svg"
 
 function ChatContainer() {
   const users = [
@@ -38,8 +39,7 @@ function ChatContainer() {
     <div
       className="flex items-center justify-center min-h-screen p-2 sm:p-6 bg-cover bg-center bg-no-repeat"
       style={{
-        backgroundImage:
-          "url('https://img.freepik.com/free-vector/realistic-bokeh-background_23-2149330381.jpg?t=st=1746521265~exp=1746524865~hmac=711b0a1c7c39e251548f9ea80037e26c4cfed39fedc53a428d3d08e17ab54826&w=996')",
+        backgroundImage: `url(${chatbg})`,
       }}
     >
       <div className="w-full max-w-7xl h-full sm:h-[90vh] flex flex-col sm:flex-row shadow rounded-lg overflow-hidden">
