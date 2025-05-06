@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
+import { Link } from "react-router-dom";
 
 function Otp() {
   const otp_length = 5;
@@ -56,12 +57,15 @@ function Otp() {
       <div>
         {/* Conditionally render the Verify button if the OTP is complete */}
         {isOtpComplete && (
+          <Link to="/chat">
           <Button
             variant="outline"
             className="cursor-pointer bg-[#7DD0AF] px-16 text-white"
           >
             Verify
           </Button>
+          </Link>
+          
         )}
       </div>
     </div>

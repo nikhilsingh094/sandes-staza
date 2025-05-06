@@ -1,4 +1,4 @@
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import {
   Dialog,
   DialogContent,
@@ -7,9 +7,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Edit } from "lucide-react";
 import { useRef } from "react";
 
@@ -26,7 +26,7 @@ const EditProfile = () => {
       <DialogTrigger asChild>
         <Button
           variant="outline"
-          className="bg-transparent border-2 text-gray-600 hover:text-black cursor-pointer"
+          className="bg-transparent border-2 text-gray-600 hover:text-black cursor-pointer w-full"
         >
             <Edit/>
           Edit Profile

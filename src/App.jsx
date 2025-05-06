@@ -1,7 +1,7 @@
 import "./App.css";
 import Home from "./Pages/HomePage/Home";
 import LoginAdmin from "./Pages/LoginAdmin/LoginAdmin";
-import Login from "./components/Login";
+import Login from "./components/sandesweb/Login";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
@@ -21,16 +21,13 @@ import LoginManagement from "./Pages/LoginManagement/LoginManagement";
 import Searchmember from "./Pages/Searchmember/Searchmember";
 import GroupManagement from "./Pages/GroupManagement/GroupManagement";
 import ImportEmployees from "./Pages/ImportEmployees/ImportEmployees";
+import ChatContainer from "./components/sandesweb/ChatContainer";
 
 function App() {
   return (
     <Router>
       <Routes>
-<<<<<<< HEAD
        <Route path="/ImportEmployees" element={<ImportEmployees />} />
-=======
-        {/* <Route path="/ImportEmployees" element={<ImportEmployees />} />
->>>>>>> 5a67afcaeee5919aec1b32148713b4c3d372c48c
         <Route path="/GroupManagement" element={<GroupManagement />} />
         <Route path="/Searchmember" element={<Searchmember />} />
         <Route path="/LoginManagement" element={<LoginManagement />} />
@@ -40,15 +37,12 @@ function App() {
         <Route path="/OrganizationUnit" element={<OrganizationUnit />} />
         <Route path="/OrganizationOverview" element={<OrganizationOverview />} />
         <Route path="/APPInsights" element={<APPInsights />} />
-<<<<<<< HEAD
         <Route path="/Dlinks" element={<Dlinks />} /> 
-=======
-        <Route path="/Dlinks" element={<Dlinks />} /> */}
->>>>>>> 5a67afcaeee5919aec1b32148713b4c3d372c48c
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/LoginWeb" element={<Login />} />
         <Route path="/LoginAdmin" element={<LoginAdmin />} />
         <Route path="/" element={<Home />} />
+        <Route path ="/chat" element={<ChatContainer/>}/>
       </Routes>
       <ToastContainer />
 

@@ -5,20 +5,12 @@ const cards = [
   {
     image: "https://cdn-icons-png.flaticon.com/512/9131/9131529.png",
     title: "Share Your Feelings",
-<<<<<<< HEAD
     description: "Express ideas candidly to encourage open dialogue and mutual respect.",
-=======
-    description: "Express yourself openly and connect emotionally.",
->>>>>>> 5a67afcaeee5919aec1b32148713b4c3d372c48c
   },
   {
     image: "https://cdn-icons-png.flaticon.com/512/3917/3917754.png",
     title: "Start New Chat",
-<<<<<<< HEAD
     description: "Strengthen personal bonds through seamless communication.",
-=======
-    description: "Reach out to your loved ones instantly.",
->>>>>>> 5a67afcaeee5919aec1b32148713b4c3d372c48c
   },
   {
     image: "https://cdn-icons-png.flaticon.com/512/10356/10356717.png",
@@ -28,11 +20,7 @@ const cards = [
   {
     image: "https://cdn-icons-png.flaticon.com/512/9132/9132294.png",
     title: "Group Conversations",
-<<<<<<< HEAD
     description: "Connect with your team or friends in one organized space.",
-=======
-    description: "Chat together with friends in a single space.",
->>>>>>> 5a67afcaeee5919aec1b32148713b4c3d372c48c
   },
 ];
 
@@ -72,11 +60,7 @@ const ConnectAndChat = () => {
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 {card.title}
               </h3>
-<<<<<<< HEAD
               <p className="text-gray-400 text-sm font-semibold">{card.description}</p>
-=======
-              <p className="text-gray-600 text-sm">{card.description}</p>
->>>>>>> 5a67afcaeee5919aec1b32148713b4c3d372c48c
             </motion.div>
           ))}
         </div>

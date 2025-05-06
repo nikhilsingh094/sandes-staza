@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import sandes_logo from "../assets/sandes_logo.png";
-import icon from "../assets/icon.png";
-import qr from "../assets/qr.webp";
-import phone from "../assets/phone.png";
+import sandes_logo from "../../assets/sandes_logo.png";
+import icon from "../../assets/icon.png";
+import qr from "../../assets/qr.webp";
+import phone from "../../assets/phone.png";
 import { motion } from "framer-motion";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import backgroundImg from "../assets/bg.jpg";
+
+import backgroundImg from "../../assets/bg.jpg";
 import Otp from "./Otp";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
 function Login() {
   const [number, setNumber] = useState("");
