@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import home from "../../assets/SandeshLanding.svg";
+import home from "../../assets/landing.svg";
 import { FaGooglePlay, FaApple } from "react-icons/fa";
 
 function Landing() {
@@ -98,7 +98,7 @@ function Landing() {
           >
             <div className="relative">
               <motion.img
-                className="w-full max-w-md lg:max-w-lg mx-auto rounded-xl shadow-xl hover:shadow-2xl h-[25rem]"
+                className="md:max-w-2xl lg:max-w-lg mx-auto rounded-xl hover:shadow-2xl h-[30rem]"
                 src={home}
                 alt="Sandes App Preview"
                 whileHover={{ scale: 1.08, rotate: 1 }}

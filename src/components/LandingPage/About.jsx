@@ -1,5 +1,5 @@
 import React from "react";
-import about from "../../assets/about.png";
+import about from "../../assets/about.svg";
 
 function About() {
   return (
@@ -12,7 +12,7 @@ function About() {
         <div className="relative z-10 flex justify-center">
           <div className="relative">
             <img
-              className="max-w-xs md:max-w-md h-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
+              className="max-w-xs md:max-w-2xl h-auto rounded-2xl transform hover:scale-105 transition-transform duration-500"
               src={about}
               alt="About Sandes"
             />
