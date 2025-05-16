@@ -26,7 +26,7 @@ const EditProfile = () => {
       <DialogTrigger asChild>
         <Button
           variant="outline"
-          className="bg-transparent border-2 text-gray-600 hover:text-black cursor-pointer w-full"
+          className="bg-transparent border-2 text-gray-600 font-semibold hover:text-black cursor-pointer w-full"
         >
             <Edit/>
           Edit Profile

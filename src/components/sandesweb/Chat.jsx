@@ -47,7 +47,7 @@ function Chat({ users }) {
             <PopoverTrigger asChild>
               <MoreVertical className="text-gray-600" />
             </PopoverTrigger>
-            <PopoverContent className="w-80 mr-64 mt-2 bg-[#1D3557] text-white">
+            <PopoverContent className="w-80 mr-64 mt-2 bg-[#fefefe] text-gray-600">
               <div className="p-2 flex flex-col gap-4 justify-start cursor-pointer">
                 <div className="flex items-center gap-1">
                   <Delete className="mr-2" />{" "}
@@ -58,7 +58,7 @@ function Chat({ users }) {
                   <span className="font-semibold">Clear Chat</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <LogOut className="mr-2" />{" "}
+                  <LogOut className="mr-2 text-red-500" />{" "}
                   <span className="font-semibold">Logout</span>
                 </div>
               </div>

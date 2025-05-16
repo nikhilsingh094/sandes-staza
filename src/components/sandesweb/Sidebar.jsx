@@ -54,8 +54,8 @@ function Sidebar({ users }) {
           </button>
           <div className="absolute hidden group-focus-within:block group-hover:block bg-white text-black shadow-md rounded-md p-4 bottom-full mb-2 w-full z-10">
             <EditProfile />
-            <button className="mt-4 flex items-center gap-2 border px-4 py-2 bg-[#1D3557] text-white rounded-md w-full">
-              <LogOut className="mr-2" /> Logout
+            <button className="mt-4 flex items-center gap-2 border px-4 py-2 bg-[#fefefe] text-gray-600 font-semibold rounded-md w-full">
+              <LogOut className="mr-2 text-red-500" /> Logout
             </button>
           </div>
         </div>
