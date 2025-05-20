@@ -60,7 +60,7 @@ function Sidebar({ users }) {
           {users.map((user, idx) => (
             <div
               key={idx}
-              className="flex items-center justify-between hover:bg-gray-300 hover:mt-2 hover:rounded-lg cursor-pointer"
+              className="flex items-center justify-between hover:bg-gray-300 hover:mt-2 px-1 duration-300 hover:rounded-lg cursor-pointer"
             >
               <div className="flex gap-3 items-center py-2">
                 <img
@@ -114,7 +114,7 @@ function Sidebar({ users }) {
           {users.map((user, idx) => (
             <div
               key={idx}
-              className="flex items-center justify-between hover:bg-gray-300 hover:mt-2 hover:rounded-lg cursor-pointer"
+              className="flex items-center justify-between hover:bg-gray-300 hover:mt-2 px-1 duration-300 hover:rounded-lg cursor-pointer"
             >
               <div className="flex gap-3 items-center py-2">
                 <img

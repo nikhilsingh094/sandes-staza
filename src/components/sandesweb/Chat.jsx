@@ -3,9 +3,12 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import {
   Delete,
   Eraser,
+  Forward,
   LogOut,
   MoreVertical,
+  Pin,
   Plus,
+  Reply,
   Send,
   Smile,
 } from "lucide-react";
@@ -57,17 +60,13 @@ function Chat({ users }) {
                   <Eraser className="mr-2" />{" "}
                   <span className="font-semibold">Clear Chat</span>
                 </div>
-                <div className="flex items-center gap-1">
-                  <LogOut className="mr-2 text-red-500" />{" "}
-                  <span className="font-semibold">Logout</span>
-                </div>
               </div>
 
               {/* Color Picker Popover */}
               <div className="mt-4">
                 <p className="font-semibold text-lg">Choose Chat Wallpaper:</p>
                 <div className="flex gap-2 mt-2">
-                  {["#922040","#FD6769", "#7ACBA5", "#517E7E", "#1D2326", "#55626F"].map(
+                  {["#922040", "#FD6769", "#7ACBA5", "#517E7E", "#1D2326", "#55626F"].map(
                     (color) => (
                       <div
                         key={color}
@@ -97,15 +96,13 @@ function Chat({ users }) {
             <div className="flex items-start gap-2 justify-end">
               <div className="text-right">
                 <p
-                  className={`${
-                    bgColor === "white" ? "text-gray-600" : "text-white"
-                  } text-sm font-semibold`}
+                  className={`${bgColor === "white" ? "text-gray-600" : "text-white"
+                    } text-sm font-semibold`}
                 >
                   Virat{" "}
                   <span
-                    className={`${
-                      bgColor === "white" ? "text-gray-600" : "text-white"
-                    } text-xs ml-2 font-semibold`}
+                    className={`${bgColor === "white" ? "text-gray-600" : "text-white"
+                      } text-xs ml-2 font-semibold`}
                   >
                     12:45
                   </span>
@@ -119,6 +116,33 @@ function Chat({ users }) {
                 alt="receiver"
                 className="w-10 h-10 rounded-full"
               />
+
+              <Popover>
+                <PopoverTrigger asChild>
+                  <MoreVertical className={`${bgColor === "white" ? "text-gray-600" : "text-white"
+                    } text-xs mt-1 font-semibold`} />
+                </PopoverTrigger>
+                <PopoverContent className="w-48 mr-32 mt-2 bg-[#fefefe] text-gray-600">
+                  <div className="flex flex-col gap-4 justify-start cursor-pointer">
+                    <div className="flex items-center gap-1">
+                      <Reply className="mr-2" />{" "}
+                      <span className="font-semibold">Reply</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Forward className="mr-2" />{" "}
+                      <span className="font-semibold">Forward</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Pin className="mr-2" />{" "}
+                      <span className="font-semibold">Pin Message</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Delete className="mr-2" />{" "}
+                      <span className="font-semibold">Delete</span>
+                    </div>
+                  </div>
+                </PopoverContent>
+              </Popover>
             </div>
             <div className="flex items-start gap-2">
               <img
@@ -128,15 +152,13 @@ function Chat({ users }) {
               />
               <div>
                 <p
-                  className={`${
-                    bgColor === "white" ? "text-black" : "text-white"
-                  } text-sm font-semibold`}
+                  className={`${bgColor === "white" ? "text-black" : "text-white"
+                    } text-sm font-semibold`}
                 >
                   Virat{" "}
                   <span
-                    className={`${
-                      bgColor === "white" ? "text-black" : "text-white"
-                    } text-xs ml-2 font-semibold`}
+                    className={`${bgColor === "white" ? "text-black" : "text-white"
+                      } text-xs ml-2 font-semibold`}
                   >
                     12:45
                   </span>
@@ -145,6 +167,32 @@ function Chat({ users }) {
                   Hello
                 </div>
               </div>
+               <Popover>
+                <PopoverTrigger asChild>
+                  <MoreVertical className={`${bgColor === "white" ? "text-gray-600" : "text-white"
+                    } text-xs mt-1 font-semibold`} />
+                </PopoverTrigger>
+                <PopoverContent className="w-48 mt-2 bg-[#fefefe] text-gray-600">
+                  <div className="flex flex-col gap-4 justify-start cursor-pointer">
+                    <div className="flex items-center gap-1">
+                      <Reply className="mr-2" />{" "}
+                      <span className="font-semibold">Reply</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Forward className="mr-2" />{" "}
+                      <span className="font-semibold">Forward</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Pin className="mr-2" />{" "}
+                      <span className="font-semibold">Pin Message</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Delete className="mr-2" />{" "}
+                      <span className="font-semibold">Delete</span>
+                    </div>
+                  </div>
+                </PopoverContent>
+              </Popover>
             </div>
           </div>
         ))}
