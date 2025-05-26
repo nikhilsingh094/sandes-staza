@@ -3,6 +3,7 @@ import { Backpack, BackpackIcon, Group, LogOut, LogOutIcon, MoreVertical, PlusCi
 import EditProfile from "./EditProfile";
 import { Badge } from "../ui/badge";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import OtherUsers from "./OtherUsers";
 
 function Sidebar({ users }) {
   const [isPlusSidebarVisible, setIsPlusSidebarVisible] = useState(false);
@@ -110,23 +111,7 @@ function Sidebar({ users }) {
 
         <hr className="h-[1px] bg-gray-800 border-0" />
 
-        <div className="overflow-y-auto flex-grow px-4">
-          {users.map((user, idx) => (
-            <div
-              key={idx}
-              className="flex items-center justify-between hover:bg-gray-300 hover:mt-2 px-1 duration-300 hover:rounded-lg cursor-pointer"
-            >
-              <div className="flex gap-3 items-center py-2">
-                <img
-                  src={user.image}
-                  alt="user"
-                  className="w-10 h-10 rounded-full border-2"
-                />
-                <p className="text-gray-600 font-medium">{user.name}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+       <OtherUsers users = {users}/>
       </div>
     </>
   );

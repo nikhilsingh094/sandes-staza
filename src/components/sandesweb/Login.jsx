@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import sandes_logo from "../../assets/sandes_logo.png";
 import icon from "../../assets/icon.png";
-import qr from "../../assets/qr.webp";
 import phone from "../../assets/phone.png";
 import { motion } from "framer-motion";
 
@@ -9,6 +8,7 @@ import backgroundImg from "../../assets/bg.jpg";
 import Otp from "./Otp";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import QrGenerator from "./QrGenerator";
 
 function Login() {
   const [number, setNumber] = useState("");
@@ -93,11 +93,8 @@ function Login() {
                 ease: "easeInOut",
               }}
             />
-            <img
-              src={qr}
-              alt="qr"
-              className="w-48 h-48 sm:w-60 sm:h-60 mx-auto"
-            />
+          
+            <QrGenerator/>
             <div className="border-t border-gray-300 pt-4">
               <div
                 className="flex gap-2 items-center justify-center cursor-pointer"
