@@ -35,6 +35,7 @@
     "bootstrap": "^5.3.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "converse.js": "^6.0.1",
     "emoji-picker-react": "^4.12.2",
     "framer-motion": "^12.7.4",
     "lucide-react": "^0.503.0",
