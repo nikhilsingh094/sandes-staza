@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import {
   Delete,
@@ -15,11 +15,44 @@ import {
 import chatbg from "../../assets/BGsociall.svg";
 import chatbg2 from "../../assets/BGsocial.svg";
 import EmojiPicker from "emoji-picker-react";
+import { connectXMPP } from "../sandesweb/stanzaClient";
 
-function Chat({ users }) {
+function Chat({ users, jid, password, to }) {
   const inputRef = useRef(null);
   const [bgColor, setBgColor] = useState("white");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState("");
+  const clientRef = useRef(null);
+
+  useEffect(() => {
+    const client = connectXMPP({
+      jid,
+      password,
+      onMessage: (msg) => {
+        setMessages((prev) => [...prev, { from: msg.from, body: msg.body }]);
+      },
+    });
+
+    clientRef.current = client;
+
+    return () => {
+      client.disconnect();
+    };
+  }, [jid, password]);
+
+  const sendMessage = () => {
+    if (input.trim() === "") return;
+
+    clientRef.current.sendMessage({
+      to,
+      type: "chat",
+      body: input,
+    });
+
+    setMessages((prev) => [...prev, { from: jid, body: input }]);
+    setInput("");
+  };
 
   const openFile = () => inputRef.current?.click();
 
@@ -34,8 +67,13 @@ function Chat({ users }) {
     setShowEmojiPicker((prev) => !prev);
   };
 
+  const handleEmojiClick = (emojiData) => {
+    setInput((prev) => prev + emojiData.emoji);
+  };
+
   return (
     <div className="flex-1 flex flex-col bg-white">
+      {/* Header */}
       <div className="bg-white shadow-md flex items-center justify-between">
         <div className="text-white flex gap-2 p-4 items-center">
           <img
@@ -43,7 +81,7 @@ function Chat({ users }) {
             alt="profile"
             className="w-10 h-10 rounded-full border-2"
           />
-          <p className="font-semibold text-gray-600">Virat</p>
+          <p className="font-semibold text-gray-600">Chat with {to}</p>
         </div>
         <div className="p-4">
           <Popover>
@@ -53,16 +91,14 @@ function Chat({ users }) {
             <PopoverContent className="w-80 mr-64 mt-2 bg-[#fefefe] text-gray-600">
               <div className="p-2 flex flex-col gap-4 justify-start cursor-pointer">
                 <div className="flex items-center gap-1">
-                  <Delete className="mr-2" />{" "}
+                  <Delete className="mr-2" />
                   <span className="font-semibold">Delete Chat</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Eraser className="mr-2" />{" "}
+                  <Eraser className="mr-2" />
                   <span className="font-semibold">Clear Chat</span>
                 </div>
               </div>
-
-              {/* Color Picker Popover */}
               <div className="mt-4">
                 <p className="font-semibold text-lg">Choose Chat Wallpaper:</p>
                 <div className="flex gap-2 mt-2">
@@ -83,7 +119,7 @@ function Chat({ users }) {
         </div>
       </div>
 
-      {/* Chat Messages */}
+      {/* Messages */}
       <div
         className="flex-grow overflow-y-auto p-4 space-y-4 bg-cover bg-center bg-no-repeat"
         style={{
@@ -91,133 +127,51 @@ function Chat({ users }) {
           backgroundColor: bgColor,
         }}
       >
-        {[...Array(6)].map((_, i) => (
-          <div key={i}>
-            <div className="flex items-start gap-2 justify-end">
-              <div className="text-right">
-                <p
-                  className={`${bgColor === "white" ? "text-gray-600" : "text-white"
-                    } text-sm font-semibold`}
-                >
-                  Virat{" "}
-                  <span
-                    className={`${bgColor === "white" ? "text-gray-600" : "text-white"
-                      } text-xs ml-2 font-semibold`}
-                  >
-                    12:45
-                  </span>
-                </p>
-                <div className="bg-[#A6E38D] p-2 rounded-md mt-1 text-gray-600 font-semibold">
-                  Hi
-                </div>
-              </div>
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Virat_Kohli_during_the_India_vs_Aus_4th_Test_match_at_Narendra_Modi_Stadium_on_09_March_2023.jpg"
-                alt="receiver"
-                className="w-10 h-10 rounded-full"
-              />
-
-              <Popover>
-                <PopoverTrigger asChild>
-                  <MoreVertical className={`${bgColor === "white" ? "text-gray-600" : "text-white"
-                    } text-xs mt-1 font-semibold`} />
-                </PopoverTrigger>
-                <PopoverContent className="w-48 mr-32 mt-2 bg-[#fefefe] text-gray-600">
-                  <div className="flex flex-col gap-4 justify-start cursor-pointer">
-                    <div className="flex items-center gap-1">
-                      <Reply className="mr-2" />{" "}
-                      <span className="font-semibold">Reply</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Forward className="mr-2" />{" "}
-                      <span className="font-semibold">Forward</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Pin className="mr-2" />{" "}
-                      <span className="font-semibold">Pin Message</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Delete className="mr-2" />{" "}
-                      <span className="font-semibold">Delete</span>
-                    </div>
-                  </div>
-                </PopoverContent>
-              </Popover>
-            </div>
-            <div className="flex items-start gap-2">
+        {messages.map((msg, index) => (
+          <div
+            key={index}
+            className={`flex items-start gap-2 ${msg.from === jid ? "justify-end" : "justify-start"}`}
+          >
+            {msg.from !== jid && (
               <img
                 src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQTlwWgDhpwPXCkXe8piQjXZzfMQh9aQrtPAblzDBwlp4WyO1znKRiXRsA45I2j9agVJH5mm_hYVAK9sRXtoym1pQ"
                 alt="sender"
                 className="w-10 h-10 rounded-full"
               />
-              <div>
-                <p
-                  className={`${bgColor === "white" ? "text-black" : "text-white"
-                    } text-sm font-semibold`}
-                >
-                  Virat{" "}
-                  <span
-                    className={`${bgColor === "white" ? "text-black" : "text-white"
-                      } text-xs ml-2 font-semibold`}
-                  >
-                    12:45
-                  </span>
-                </p>
-                <div className="bg-gray-100 p-2 rounded-md mt-1 text-gray-600 font-semibold">
-                  Hello
-                </div>
-              </div>
-               <Popover>
-                <PopoverTrigger asChild>
-                  <MoreVertical className={`${bgColor === "white" ? "text-gray-600" : "text-white"
-                    } text-xs mt-1 font-semibold`} />
-                </PopoverTrigger>
-                <PopoverContent className="w-48 mt-2 bg-[#fefefe] text-gray-600">
-                  <div className="flex flex-col gap-4 justify-start cursor-pointer">
-                    <div className="flex items-center gap-1">
-                      <Reply className="mr-2" />{" "}
-                      <span className="font-semibold">Reply</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Forward className="mr-2" />{" "}
-                      <span className="font-semibold">Forward</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Pin className="mr-2" />{" "}
-                      <span className="font-semibold">Pin Message</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Delete className="mr-2" />{" "}
-                      <span className="font-semibold">Delete</span>
-                    </div>
-                  </div>
-                </PopoverContent>
-              </Popover>
+            )}
+            <div className={`${msg.from === jid ? "bg-[#A6E38D]" : "bg-gray-100"} p-2 rounded-md max-w-xs`}>
+              <p className="text-sm text-gray-700 font-semibold">{msg.body}</p>
             </div>
+            {msg.from === jid && (
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Virat_Kohli_during_the_India_vs_Aus_4th_Test_match_at_Narendra_Modi_Stadium_on_09_March_2023.jpg"
+                alt="sender"
+                className="w-10 h-10 rounded-full"
+              />
+            )}
           </div>
         ))}
       </div>
 
-      {/* Chat Input */}
+      {/* Input */}
       <div className="p-3 border-t flex items-center gap-2">
         <input ref={inputRef} type="file" className="hidden" />
         <div className="w-full py-2 flex items-center gap-2 bg-gray-100 px-2 border-1 rounded-lg">
           <Plus onClick={openFile} className="cursor-pointer" />
-          <Smile onClick={toggleEmojiPicker} className="cursor-pointer" />{" "}
-          {/* Emoji button */}
+          <Smile onClick={toggleEmojiPicker} className="cursor-pointer" />
           {showEmojiPicker && (
             <div className="md:absolute bottom-36 z-10">
-              <EmojiPicker
-                onEmojiClick={(e, emojiObject) => console.log(emojiObject)}
-              />
+              <EmojiPicker onEmojiClick={handleEmojiClick} />
             </div>
           )}
           <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
             type="text"
             className="w-full bg-gray-100 border-none rounded-md py-2 font-semibold text-gray-600 focus:outline-none"
             placeholder="Write a message..."
           />
-          <Send className="cursor-pointer" />
+          <Send className="cursor-pointer" onClick={sendMessage} />
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ import bg from "../../assets/bg.jpg";
 import Sidebar from "./Sidebar";
 import Chat from "./Chat";
 
-function ChatContainer() {
+function ChatContainer({ jid, password, to }) {
   const users = [
     {
       name: "Virat",
@@ -47,7 +47,7 @@ function ChatContainer() {
         <div className="w-px h-full bg-gray-300"></div>
 
         {/* Chat Window */}
-        <Chat users={users} />
+        <Chat users={users} jid={jid} password={password} to={to}/>
       </div>
     </div>
   );
