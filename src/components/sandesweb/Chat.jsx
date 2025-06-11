@@ -3,12 +3,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import {
   Delete,
   Eraser,
-  Forward,
-  LogOut,
   MoreVertical,
-  Pin,
   Plus,
-  Reply,
   Send,
   Smile,
 } from "lucide-react";
@@ -24,6 +20,7 @@ function Chat({ users, jid, password, to }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const clientRef = useRef(null);
+
 
   useEffect(() => {
     const client = connectXMPP({
@@ -81,7 +78,8 @@ function Chat({ users, jid, password, to }) {
             alt="profile"
             className="w-10 h-10 rounded-full border-2"
           />
-          <p className="font-semibold text-gray-600">Chat with {to}</p>
+          <p className="font-semibold text-gray-600">{jid.split('@')[0]}</p>
+
         </div>
         <div className="p-4">
           <Popover>

@@ -4,13 +4,18 @@ import EditProfile from "./EditProfile";
 import { Badge } from "../ui/badge";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import OtherUsers from "./OtherUsers";
+import { useDispatch } from "react-redux";
+import { selectUser } from "../sandesweb/redux/userSlice";
 
-function Sidebar({ users }) {
+function Sidebar({ users, jid }) {
   const [isPlusSidebarVisible, setIsPlusSidebarVisible] = useState(false);
 
   const toggleSidebar = () => {
     setIsPlusSidebarVisible(!isPlusSidebarVisible);
   };
+
+  const dispatch = useDispatch();
+  const filteredUsers = users.filter((user) => user.jid !== jid);
 
   return (
     <>
@@ -49,7 +54,7 @@ function Sidebar({ users }) {
             />
           </div>
         </div>
-        
+
         <hr className="h-[1px] bg-gray-800 border-0" />
 
         <div className="overflow-y-auto flex-grow px-4">
@@ -57,25 +62,13 @@ function Sidebar({ users }) {
             <Badge className="cursor-pointer" variant="outline">All</Badge>
             <Badge className="cursor-pointer" variant="outline">Groups</Badge>
           </div>
+          {filteredUsers.map((user, idx) => (
+            <div key={idx} onClick={() => dispatch(selectUser(user))}>
+              <div className="flex items-center gap-2 cursor-pointer">
+                <img className="w-8 h-8 rounded-full border" src="" />
+                <p className="font-semibold">{user.name}</p>
+              </div>
 
-          {users.map((user, idx) => (
-            <div
-              key={idx}
-              className="flex items-center justify-between hover:bg-gray-300 hover:mt-2 px-1 duration-300 hover:rounded-lg cursor-pointer"
-            >
-              <div className="flex gap-3 items-center py-2">
-                <img
-                  src={user.image}
-                  alt="user"
-                  className="w-10 h-10 rounded-full border-2"
-                />
-                <p className="text-gray-600 font-medium">{user.name}</p>
-              </div>
-              <div>
-                <span className="text-sm text-gray-600 font-semibold">
-                  4:12 am
-                </span>
-              </div>
             </div>
           ))}
         </div>
@@ -98,7 +91,7 @@ function Sidebar({ users }) {
       {/* Plus Sidebar - Show when plus icon is clicked */}
       <div className={`bg-white w-full sm:w-[275px] flex flex-col transition-all duration-300 ${isPlusSidebarVisible ? 'block' : 'hidden'}`}>
         <div className="p-4">
-          <StepBack className="mb-2 cursor-pointer" onClick={toggleSidebar}/>
+          <StepBack className="mb-2 cursor-pointer" onClick={toggleSidebar} />
           <div className="bg-gray-100 flex items-center gap-2 px-4 py-2 rounded-md border">
             <Search className="text-gray-600" />
             <input
@@ -111,7 +104,7 @@ function Sidebar({ users }) {
 
         <hr className="h-[1px] bg-gray-800 border-0" />
 
-       <OtherUsers users = {users}/>
+        <OtherUsers users={users} />
       </div>
     </>
   );

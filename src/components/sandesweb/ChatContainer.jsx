@@ -1,37 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import bg from "../../assets/bg.jpg";
 
 import Sidebar from "./Sidebar";
 import Chat from "./Chat";
+import { connectXMPP } from "../sandesweb/stanzaClient";
+import { useSelector } from "react-redux";
 
-function ChatContainer({ jid, password, to }) {
+function ChatContainer() {
+
+  const { jid, password, selectedUser } = useSelector((state) => state.user);
+  const [client, setClient] = useState(null);
+
   const users = [
-    {
-      name: "Virat",
-      image:
-        "https://upload.wikimedia.org/wikipedia/commons/e/ef/Virat_Kohli_during_the_India_vs_Aus_4th_Test_match_at_Narendra_Modi_Stadium_on_09_March_2023.jpg",
-    },
-    {
-      name: "Shreyas",
-      image:
-        "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQTlwWgDhpwPXCkXe8piQjXZzfMQh9aQrtPAblzDBwlp4WyO1znKRiXRsA45I2j9agVJH5mm_hYVAK9sRXtoym1pQ",
-    },
-    {
-      name: "Bumrah",
-      image: "https://documents.iplt20.com/ipl/IPLHeadshot2025/9.png",
-    },
-    {
-      name: "Group 1",
-      image:
-        "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=1949&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      name: "Group 2",
-      image:
-        "https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
+    { jid: "user1@localhost", name: "User One", image: "user1.png" },
+    { jid: "user2@localhost", name: "User Two", image: "user2.png" },
   ];
+
+  useEffect(() => {
+    if (!jid || !password) return;
+
+    const xmppClient = connectXMPP({
+      jid,
+      password,
+      onMessage: (msg) => {
+        // message logic here
+      },
+    });
+
+    setClient(xmppClient);
+
+    return () => xmppClient.disconnect();
+  }, [jid, password]);
 
   return (
     <div
@@ -42,15 +42,38 @@ function ChatContainer({ jid, password, to }) {
     >
       <div className="w-full max-w-7xl h-full sm:h-[90vh] flex flex-col sm:flex-row shadow rounded-lg overflow-hidden border-1 border-gray-300">
         {/* Sidebar */}
-        <Sidebar users={users} />
+        <Sidebar users={users} jid={jid} />
 
         <div className="w-px h-full bg-gray-300"></div>
 
         {/* Chat Window */}
-        <Chat users={users} jid={jid} password={password} to={to}/>
+        {selectedUser ? (
+          <Chat
+            users={[selectedUser]}
+            jid={jid}
+            password={password}
+            to={selectedUser.jid}
+          />
+        ) : (
+          <div className="h-full w-full flex flex-col items-center justify-center text-gray-500 text-4xl font-bold">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/2462/2462719.png"
+              alt="Start Conversation"
+              className="w-40 h-40 mb-6 opacity-80"
+            />
+            Let's start conversation
+          </div>
+
+        )}
       </div>
     </div>
   );
 }
 
+
+
+
 export default ChatContainer;
+
+
+
