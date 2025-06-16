@@ -18,6 +18,18 @@ function App() {
       jid = "user2@localhost";
       password = "123456";
     }
+    else if (path.includes("user3")) {
+      jid = "user3@localhost";
+      password = "123456";
+    }
+    else if (path.includes("user4")) {
+      jid = "user4@localhost";
+      password = "123456";
+    }
+    else if (path.includes("user5")) {
+      jid = "user5@localhost";
+      password = "123456";
+    }
 
     if (jid && password) {
       dispatch(setCredentials({ jid, password }));
@@ -26,10 +38,10 @@ function App() {
 
   const path = window.location.pathname;
 
-  if (!path.includes("user1") && !path.includes("user2")) {
+  if (!path.includes("user1") && !path.includes("user2") && !path.includes("user3") && !path.includes("user4")&& !path.includes("user5")) {
     return (
       <div className="text-center mt-10 text-lg font-bold">
-        ❌ Add `/user1` or `/user2` in the URL
+        ❌ Add User in the URL
       </div>
     );
   }

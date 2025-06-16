@@ -15,6 +15,9 @@ function ChatContainer() {
   const users = [
     { jid: "user1@localhost", name: "User One", image: "user1.png" },
     { jid: "user2@localhost", name: "User Two", image: "user2.png" },
+    { jid: "user3@localhost", name: "User Three", image: "user3.png" },
+    { jid: "user4@localhost", name: "User Four", image: "user4.png" },
+    { jid: "user5@localhost", name: "User Five", image: "user5.png" },
   ];
 
   useEffect(() => {
@@ -23,9 +26,6 @@ function ChatContainer() {
     const xmppClient = connectXMPP({
       jid,
       password,
-      onMessage: (msg) => {
-        // message logic here
-      },
     });
 
     setClient(xmppClient);

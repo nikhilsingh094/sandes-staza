@@ -12,6 +12,7 @@ import chatbg from "../../assets/BGsociall.svg";
 import chatbg2 from "../../assets/BGsocial.svg";
 import EmojiPicker from "emoji-picker-react";
 import { connectXMPP } from "../sandesweb/stanzaClient";
+import { useSelector } from "react-redux";
 
 function Chat({ users, jid, password, to }) {
   const inputRef = useRef(null);
@@ -21,35 +22,49 @@ function Chat({ users, jid, password, to }) {
   const [input, setInput] = useState("");
   const clientRef = useRef(null);
 
+  const { selectedUser } = useSelector((state) => state.user);
 
   useEffect(() => {
+    if (!selectedUser?.jid) return;
+
     const client = connectXMPP({
       jid,
       password,
       onMessage: (msg) => {
-        setMessages((prev) => [...prev, { from: msg.from, body: msg.body }]);
+        const bareFrom = msg.from.split('/')[0];
+        const bareTo = msg.to.split('/')[0];
+
+        // Only show messages between selected user and self
+        if (
+          (bareFrom === jid && bareTo === selectedUser.jid) ||
+          (bareFrom === selectedUser.jid && bareTo === jid)
+        ) {
+          setMessages((prev) => [...prev, { from: bareFrom, body: msg.body }]);
+        }
       },
     });
 
     clientRef.current = client;
+    setMessages([]); // Clear messages when selected user changes
 
     return () => {
       client.disconnect();
     };
-  }, [jid, password]);
+  }, [jid, password, selectedUser?.jid]);
 
-  const sendMessage = () => {
-    if (input.trim() === "") return;
 
-    clientRef.current.sendMessage({
-      to,
-      type: "chat",
-      body: input,
-    });
+ const sendMessage = () => {
+  if (!input.trim() || !selectedUser?.jid) return;
 
-    setMessages((prev) => [...prev, { from: jid, body: input }]);
-    setInput("");
-  };
+  clientRef.current.sendMessage({
+    to: selectedUser.jid,
+    type: "chat",
+    body: input,
+  });
+
+  setMessages((prev) => [...prev, { from: jid, body: input }]);
+  setInput("");
+};
 
   const openFile = () => inputRef.current?.click();
 
@@ -78,7 +93,7 @@ function Chat({ users, jid, password, to }) {
             alt="profile"
             className="w-10 h-10 rounded-full border-2"
           />
-          <p className="font-semibold text-gray-600">{jid.split('@')[0]}</p>
+          <p className="font-semibold text-gray-600">{selectedUser?.name}</p>
 
         </div>
         <div className="p-4">
