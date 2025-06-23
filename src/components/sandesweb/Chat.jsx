@@ -35,10 +35,7 @@ function Chat({ users, jid, password, to }) {
         const bareTo = msg.to.split('/')[0];
 
         // Only show messages between selected user and self
-        if (
-          (bareFrom === jid && bareTo === selectedUser.jid) ||
-          (bareFrom === selectedUser.jid && bareTo === jid)
-        ) {
+        if (bareFrom === selectedUser.jid && bareTo === jid) {
           setMessages((prev) => [...prev, { from: bareFrom, body: msg.body }]);
         }
       },
@@ -53,18 +50,18 @@ function Chat({ users, jid, password, to }) {
   }, [jid, password, selectedUser?.jid]);
 
 
- const sendMessage = () => {
-  if (!input.trim() || !selectedUser?.jid) return;
+  const sendMessage = () => {
+    if (!input.trim() || !selectedUser?.jid) return;
 
-  clientRef.current.sendMessage({
-    to: selectedUser.jid,
-    type: "chat",
-    body: input,
-  });
+    clientRef.current.sendMessage({
+      to: selectedUser.jid,
+      type: "chat",
+      body: input,
+    });
 
-  setMessages((prev) => [...prev, { from: jid, body: input }]);
-  setInput("");
-};
+    setMessages((prev) => [...prev, { from: jid, body: input }]);
+    setInput("");
+  };
 
   const openFile = () => inputRef.current?.click();
 

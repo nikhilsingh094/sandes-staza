@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-
 import bg from "../../assets/bg.jpg";
-
 import Sidebar from "./Sidebar";
 import Chat from "./Chat";
 import { connectXMPP } from "../sandesweb/stanzaClient";
 import { useSelector } from "react-redux";
 
 function ChatContainer() {
-
   const { jid, password, selectedUser } = useSelector((state) => state.user);
   const [client, setClient] = useState(null);
+
+  // 🔁 New state to track online/offline
+  const [presenceMap, setPresenceMap] = useState({});
 
   const users = [
     { jid: "user1@localhost", name: "User One", image: "user1.png" },
@@ -20,40 +20,52 @@ function ChatContainer() {
     { jid: "user5@localhost", name: "User Five", image: "user5.png" },
   ];
 
-  useEffect(() => {
-    if (!jid || !password) return;
+ useEffect(() => {
+  if (!jid || !password) return;
 
-    const xmppClient = connectXMPP({
-      jid,
-      password,
-    });
+  const xmppClient = connectXMPP({
+    jid,
+    password,
+    onMessage: () => {},
+    onPresence: (from, isOnline) => {
+      setPresenceMap((prev) => ({
+        ...prev,
+        [from]: isOnline,
+      }));
+    },
+  });
 
-    setClient(xmppClient);
+  setClient(xmppClient);
 
-    return () => xmppClient.disconnect();
-  }, [jid, password]);
+  // 🛑 Ensure disconnect on page close or reload
+  const handleUnload = () => {
+    if (xmppClient) {
+      xmppClient.disconnect();  // Sends unavailable presence
+    }
+  };
+
+  window.addEventListener("beforeunload", handleUnload);
+
+  return () => {
+    window.removeEventListener("beforeunload", handleUnload);
+    xmppClient.disconnect(); // also handle on unmount
+  };
+}, [jid, password]);
+
 
   return (
     <div
       className="flex items-center justify-center min-h-screen p-2 sm:p-6 bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: `url(${bg})`,
-      }}
+      style={{ backgroundImage: `url(${bg})` }}
     >
       <div className="w-full max-w-7xl h-full sm:h-[90vh] flex flex-col sm:flex-row shadow rounded-lg overflow-hidden border-1 border-gray-300">
-        {/* Sidebar */}
-        <Sidebar users={users} jid={jid} />
+        {/* Sidebar with presence map */}
+        <Sidebar users={users} jid={jid} presenceMap={presenceMap} />
 
         <div className="w-px h-full bg-gray-300"></div>
 
-        {/* Chat Window */}
         {selectedUser ? (
-          <Chat
-            users={[selectedUser]}
-            jid={jid}
-            password={password}
-            to={selectedUser.jid}
-          />
+          <Chat users={[selectedUser]} jid={jid} password={password} to={selectedUser.jid} />
         ) : (
           <div className="h-full w-full flex flex-col items-center justify-center text-gray-500 text-4xl font-bold">
             <img
@@ -63,17 +75,10 @@ function ChatContainer() {
             />
             Let's start conversation
           </div>
-
         )}
       </div>
     </div>
   );
 }
 
-
-
-
 export default ChatContainer;
-
-
-
