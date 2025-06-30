@@ -1,4 +1,7 @@
 import { createClient } from 'stanza';
+import { addNotification } from './redux/notificationSlice';
+import { store } from './redux/store';
+import { addMessage } from './redux/messageSlice';
 
 export const connectXMPP = ({ jid, password, onMessage, onPresence }) => {
   const client = createClient({
@@ -48,8 +51,33 @@ export const connectXMPP = ({ jid, password, onMessage, onPresence }) => {
   });
 
   // Handle incoming messages
-  client.on('message', (msg) => {
+client.on('message', (msg) => {
+    const fromJid = msg.from.split('/')[0];
+    const toJid = msg.to?.split('/')[0];
+    const currentUser = jid;
+    const selectedUser = store.getState().user.selectedUser;
+
+    const isFromMe = fromJid === currentUser;
+    const otherJid = isFromMe ? toJid : fromJid;
+
     if (msg.body) {
+      // ✅ Save message in Redux
+      store.dispatch(
+        addMessage({
+          userJid: otherJid,
+          message: {
+            body: msg.body,
+            fromMe: isFromMe,
+          },
+        })
+      );
+
+      // ✅ Show notification if not current chat
+      if (!selectedUser || selectedUser.jid !== fromJid) {
+        store.dispatch(addNotification(fromJid));
+      }
+
+      // ✅ Optional: trigger callback
       onMessage?.(msg);
     }
   });

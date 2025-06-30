@@ -1,79 +1,46 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import {
-  Delete,
-  Eraser,
-  MoreVertical,
-  Plus,
-  Send,
-  Smile,
-} from "lucide-react";
-import chatbg from "../../assets/BGsociall.svg";
-import chatbg2 from "../../assets/BGsocial.svg";
+import React, { useRef, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addMessage } from "../sandesweb/redux/messageSlice";
+import { Smile, Plus, Send, MoreVertical, Delete, Eraser } from "lucide-react";
+import { Popover, PopoverTrigger, PopoverContent } from "../ui/popover";
 import EmojiPicker from "emoji-picker-react";
-import { connectXMPP } from "../sandesweb/stanzaClient";
-import { useSelector } from "react-redux";
 
-function Chat({ users, jid, password, to }) {
+// ✅ Backgrounds
+import chatbg from "../../assets/BGsociall.svg";   // Transparent overlay
+import chatbg2 from "../../assets/BGsocial.svg";   // Default full wallpaper
+
+function Chat({ users, jid, client }) {
   const inputRef = useRef(null);
+  const dispatch = useDispatch();
+  const [input, setInput] = useState("");
   const [bgColor, setBgColor] = useState("white");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState("");
-  const clientRef = useRef(null);
 
   const { selectedUser } = useSelector((state) => state.user);
-
-  useEffect(() => {
-    if (!selectedUser?.jid) return;
-
-    const client = connectXMPP({
-      jid,
-      password,
-      onMessage: (msg) => {
-        const bareFrom = msg.from.split('/')[0];
-        const bareTo = msg.to.split('/')[0];
-
-        // Only show messages between selected user and self
-        if (bareFrom === selectedUser.jid && bareTo === jid) {
-          setMessages((prev) => [...prev, { from: bareFrom, body: msg.body }]);
-        }
-      },
-    });
-
-    clientRef.current = client;
-    setMessages([]); // Clear messages when selected user changes
-
-    return () => {
-      client.disconnect();
-    };
-  }, [jid, password, selectedUser?.jid]);
-
+  const messages = useSelector(
+    (state) => state.messages.chatMap[selectedUser?.jid] || []
+  );
 
   const sendMessage = () => {
     if (!input.trim() || !selectedUser?.jid) return;
 
-    clientRef.current.sendMessage({
+    client.sendMessage({
       to: selectedUser.jid,
       type: "chat",
       body: input,
     });
 
-    setMessages((prev) => [...prev, { from: jid, body: input }]);
+    dispatch(
+      addMessage({
+        userJid: selectedUser.jid,
+        message: {
+          body: input,
+          fromMe: true,
+        },
+      })
+    );
+
     setInput("");
-  };
-
-  const openFile = () => inputRef.current?.click();
-
-  const handleColorClick = (color) => {
-    setBgColor(color);
-  };
-
-  const defaultImage = chatbg2;
-  const transparentImage = chatbg;
-
-  const toggleEmojiPicker = () => {
-    setShowEmojiPicker((prev) => !prev);
   };
 
   const handleEmojiClick = (emojiData) => {
@@ -82,7 +49,7 @@ function Chat({ users, jid, password, to }) {
 
   return (
     <div className="flex-1 flex flex-col bg-white">
-      {/* Header */}
+      {/* Chat Header */}
       <div className="bg-white shadow-md flex items-center justify-between">
         <div className="text-white flex gap-2 p-4 items-center">
           <img
@@ -91,12 +58,11 @@ function Chat({ users, jid, password, to }) {
             className="w-10 h-10 rounded-full border-2"
           />
           <p className="font-semibold text-gray-600">{selectedUser?.name}</p>
-
         </div>
         <div className="p-4">
           <Popover>
             <PopoverTrigger asChild>
-              <MoreVertical className="text-gray-600" />
+              <MoreVertical className="text-gray-600 cursor-pointer" />
             </PopoverTrigger>
             <PopoverContent className="w-80 mr-64 mt-2 bg-[#fefefe] text-gray-600">
               <div className="p-2 flex flex-col gap-4 justify-start cursor-pointer">
@@ -112,12 +78,12 @@ function Chat({ users, jid, password, to }) {
               <div className="mt-4">
                 <p className="font-semibold text-lg">Choose Chat Wallpaper:</p>
                 <div className="flex gap-2 mt-2">
-                  {["#922040", "#FD6769", "#7ACBA5", "#517E7E", "#1D2326", "#55626F"].map(
+                  {["white", "#922040", "#FD6769", "#7ACBA5", "#517E7E", "#1D2326", "#55626F"].map(
                     (color) => (
                       <div
                         key={color}
-                        onClick={() => handleColorClick(color)}
-                        className="w-10 h-10 cursor-pointer rounded-full"
+                        onClick={() => setBgColor(color)}
+                        className="w-10 h-10 cursor-pointer rounded-full border"
                         style={{ backgroundColor: color }}
                       />
                     )
@@ -129,46 +95,38 @@ function Chat({ users, jid, password, to }) {
         </div>
       </div>
 
-      {/* Messages */}
+      {/* Messages Area */}
       <div
         className="flex-grow overflow-y-auto p-4 space-y-4 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url(${bgColor === "white" ? defaultImage : transparentImage})`,
           backgroundColor: bgColor,
+          backgroundImage:
+            bgColor === "white" ? `url(${chatbg2})` : `url(${chatbg})`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "cover",
         }}
+
       >
         {messages.map((msg, index) => (
           <div
             key={index}
-            className={`flex items-start gap-2 ${msg.from === jid ? "justify-end" : "justify-start"}`}
+            className={`flex ${msg.fromMe ? "justify-end" : "justify-start"}`}
           >
-            {msg.from !== jid && (
-              <img
-                src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQTlwWgDhpwPXCkXe8piQjXZzfMQh9aQrtPAblzDBwlp4WyO1znKRiXRsA45I2j9agVJH5mm_hYVAK9sRXtoym1pQ"
-                alt="sender"
-                className="w-10 h-10 rounded-full"
-              />
-            )}
-            <div className={`${msg.from === jid ? "bg-[#A6E38D]" : "bg-gray-100"} p-2 rounded-md max-w-xs`}>
+            <div
+              className={`${msg.fromMe ? "bg-[#A6E38D]" : "bg-gray-100"
+                } p-2 rounded-md max-w-xs`}
+            >
               <p className="text-sm text-gray-700 font-semibold">{msg.body}</p>
             </div>
-            {msg.from === jid && (
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Virat_Kohli_during_the_India_vs_Aus_4th_Test_match_at_Narendra_Modi_Stadium_on_09_March_2023.jpg"
-                alt="sender"
-                className="w-10 h-10 rounded-full"
-              />
-            )}
           </div>
         ))}
       </div>
 
-      {/* Input */}
+      {/* Input Area */}
       <div className="p-3 border-t flex items-center gap-2">
-        <input ref={inputRef} type="file" className="hidden" />
         <div className="w-full py-2 flex items-center gap-2 bg-gray-100 px-2 border-1 rounded-lg">
-          <Plus onClick={openFile} className="cursor-pointer" />
-          <Smile onClick={toggleEmojiPicker} className="cursor-pointer" />
+          <Plus onClick={() => inputRef.current?.click()} className="cursor-pointer" />
+          <Smile onClick={() => setShowEmojiPicker(!showEmojiPicker)} className="cursor-pointer" />
           {showEmojiPicker && (
             <div className="md:absolute bottom-36 z-10">
               <EmojiPicker onEmojiClick={handleEmojiClick} />

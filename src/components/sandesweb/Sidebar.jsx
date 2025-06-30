@@ -6,9 +6,12 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../sandesweb/redux/userSlice";
 
-function Sidebar({ users, jid,presenceMap }) {
+function Sidebar({ users, jid, presenceMap }) {
   const [isPlusSidebarVisible, setIsPlusSidebarVisible] = useState(false);
-  const { selectedUser,presence } = useSelector((state) => state.user);
+
+  const { selectedUser } = useSelector((state) => state.user);
+  const notifications = useSelector((state) => state.noti?.notifications);
+
 
   const toggleSidebar = () => {
     setIsPlusSidebarVisible(!isPlusSidebarVisible);
@@ -62,30 +65,37 @@ function Sidebar({ users, jid,presenceMap }) {
             <Badge className="cursor-pointer" variant="outline">All</Badge>
             <Badge className="cursor-pointer" variant="outline">Groups</Badge>
           </div>
-       {filteredUsers.map((user, idx) => {
-  const isSelected = selectedUser?.jid === user.jid;
-  const isOnline = presenceMap[user.jid];
+          {filteredUsers.map((user, idx) => {
+            const isSelected = selectedUser?.jid === user.jid;
+            const isOnline = presenceMap[user.jid];
+            const hasNotification = notifications?.includes(user.jid);
 
-  return (
-    <div
-      key={idx}
-      onClick={() => dispatch(selectUser(user))}
-      className={`flex items-center gap-2 py-2 px-1 cursor-pointer duration-300 rounded-lg ${
-        isSelected ? "bg-gray-300" : "hover:bg-gray-200"
-      }`}
-    >
-      <div className="relative">
-        <img className="w-8 h-8 rounded-full border" src="" alt={user.name} />
-        <span
-          className={`absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white ${
-            isOnline ? "bg-green-500" : "bg-gray-400"
-          }`}
-        />
-      </div>
-      <p className="font-semibold">{user.name}</p>
-    </div>
-  );
-})}
+            return (
+              <div
+                key={idx}
+                onClick={() => dispatch(selectUser(user))}
+                className={`flex items-center gap-2 py-2 px-1 cursor-pointer duration-300 rounded-lg ${isSelected ? "bg-gray-300" : "hover:bg-gray-200"
+                  }`}
+              >
+                <div className="relative">
+                  <img className="w-8 h-8 rounded-full border" src="" alt={user.name} />
+                  <span
+                    className={`absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white ${isOnline ? "bg-green-500" : "bg-gray-400"
+                      }`}
+                  />
+                </div>
+                <div className="flex justify-between items-center w-full pr-2">
+                  <p className="font-semibold">{user.name}</p>
+                  {hasNotification && !isSelected && (
+                    <span className="bg-green-500 text-white text-[10px] px-2 py-[1px] rounded-full ml-2">
+                      New
+                    </span>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+
 
 
 

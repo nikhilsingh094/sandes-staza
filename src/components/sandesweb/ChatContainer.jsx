@@ -8,8 +8,6 @@ import { useSelector } from "react-redux";
 function ChatContainer() {
   const { jid, password, selectedUser } = useSelector((state) => state.user);
   const [client, setClient] = useState(null);
-
-  // 🔁 New state to track online/offline
   const [presenceMap, setPresenceMap] = useState({});
 
   const users = [
@@ -20,38 +18,35 @@ function ChatContainer() {
     { jid: "user5@localhost", name: "User Five", image: "user5.png" },
   ];
 
- useEffect(() => {
-  if (!jid || !password) return;
+  useEffect(() => {
+    if (!jid || !password) return;
 
-  const xmppClient = connectXMPP({
-    jid,
-    password,
-    onMessage: () => {},
-    onPresence: (from, isOnline) => {
-      setPresenceMap((prev) => ({
-        ...prev,
-        [from]: isOnline,
-      }));
-    },
-  });
+    const xmppClient = connectXMPP({
+      jid,
+      password,
+      onPresence: (from, isOnline) => {
+        setPresenceMap((prev) => ({
+          ...prev,
+          [from]: isOnline,
+        }));
+      },
+    });
 
-  setClient(xmppClient);
+    setClient(xmppClient);
 
-  // 🛑 Ensure disconnect on page close or reload
-  const handleUnload = () => {
-    if (xmppClient) {
-      xmppClient.disconnect();  // Sends unavailable presence
-    }
-  };
+    const handleUnload = () => {
+      if (xmppClient) {
+        xmppClient.disconnect();
+      }
+    };
 
-  window.addEventListener("beforeunload", handleUnload);
+    window.addEventListener("beforeunload", handleUnload);
 
-  return () => {
-    window.removeEventListener("beforeunload", handleUnload);
-    xmppClient.disconnect(); // also handle on unmount
-  };
-}, [jid, password]);
-
+    return () => {
+      window.removeEventListener("beforeunload", handleUnload);
+      xmppClient.disconnect();
+    };
+  }, [jid, password]);
 
   return (
     <div
@@ -59,13 +54,17 @@ function ChatContainer() {
       style={{ backgroundImage: `url(${bg})` }}
     >
       <div className="w-full max-w-7xl h-full sm:h-[90vh] flex flex-col sm:flex-row shadow rounded-lg overflow-hidden border-1 border-gray-300">
-        {/* Sidebar with presence map */}
         <Sidebar users={users} jid={jid} presenceMap={presenceMap} />
-
         <div className="w-px h-full bg-gray-300"></div>
 
         {selectedUser ? (
-          <Chat users={[selectedUser]} jid={jid} password={password} to={selectedUser.jid} />
+          <Chat
+            client={client}
+            users={[selectedUser]}
+            jid={jid}
+            password={password}
+            to={selectedUser.jid}
+          />
         ) : (
           <div className="h-full w-full flex flex-col items-center justify-center text-gray-500 text-4xl font-bold">
             <img
