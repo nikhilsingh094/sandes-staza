@@ -5,6 +5,7 @@ import { Badge } from "../ui/badge";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../sandesweb/redux/userSlice";
+import { clearNotification } from "./redux/notificationSlice";
 
 function Sidebar({ users, jid, presenceMap }) {
   const [isPlusSidebarVisible, setIsPlusSidebarVisible] = useState(false);
@@ -73,7 +74,10 @@ function Sidebar({ users, jid, presenceMap }) {
             return (
               <div
                 key={idx}
-                onClick={() => dispatch(selectUser(user))}
+                onClick={() => {
+                  dispatch(selectUser(user));
+                  dispatch(clearNotification(user.jid)); // CLEAR NOTIFICATION when chat is opened
+                }}
                 className={`flex items-center gap-2 py-2 px-1 cursor-pointer duration-300 rounded-lg ${isSelected ? "bg-gray-300" : "hover:bg-gray-200"
                   }`}
               >

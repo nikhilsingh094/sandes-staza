@@ -57,6 +57,9 @@ client.on('message', (msg) => {
     const currentUser = jid;
     const selectedUser = store.getState().user.selectedUser;
 
+
+    
+
     const isFromMe = fromJid === currentUser;
     const otherJid = isFromMe ? toJid : fromJid;
 
@@ -68,6 +71,7 @@ client.on('message', (msg) => {
           message: {
             body: msg.body,
             fromMe: isFromMe,
+             timestamp: new Date().toISOString(),
           },
         })
       );

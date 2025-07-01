@@ -13,8 +13,20 @@ const messageSlice = createSlice({
       }
       state.chatMap[userJid].push(message);
     },
+    clearMessages: (state, action) => {
+  const userJid = action.payload;
+  if (state.chatMap[userJid]) {
+    state.chatMap[userJid] = [];
+  }
+},
+
+deleteChat: (state, action) => {
+  const userJid = action.payload;
+  delete state.chatMap[userJid];
+},
+
   },
 });
 
-export const { addMessage } = messageSlice.actions;
+export const { addMessage, clearMessages, deleteChat } = messageSlice.actions;
 export default messageSlice.reducer;

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addMessage } from "../sandesweb/redux/messageSlice";
+import { addMessage, clearMessages, deleteChat } from "../sandesweb/redux/messageSlice";
 import { Smile, Plus, Send, MoreVertical, Delete, Eraser } from "lucide-react";
 import { Popover, PopoverTrigger, PopoverContent } from "../ui/popover";
 import EmojiPicker from "emoji-picker-react";
@@ -8,6 +8,8 @@ import EmojiPicker from "emoji-picker-react";
 // ✅ Backgrounds
 import chatbg from "../../assets/BGsociall.svg";   // Transparent overlay
 import chatbg2 from "../../assets/BGsocial.svg";   // Default full wallpaper
+import { selectUser } from "./redux/userSlice";
+import { clearNotification } from "./redux/notificationSlice";
 
 function Chat({ users, jid, client }) {
   const inputRef = useRef(null);
@@ -36,6 +38,7 @@ function Chat({ users, jid, client }) {
         message: {
           body: input,
           fromMe: true,
+           timestamp: new Date().toISOString(),
         },
       })
     );
@@ -64,13 +67,31 @@ function Chat({ users, jid, client }) {
             <PopoverTrigger asChild>
               <MoreVertical className="text-gray-600 cursor-pointer" />
             </PopoverTrigger>
-            <PopoverContent className="w-80 mr-64 mt-2 bg-[#fefefe] text-gray-600">
+            <PopoverContent
+              className="w-80 bg-[#fefefe] text-gray-600 right-0 mt-2 z-50"
+              side="bottom"
+              align="end"
+            >
               <div className="p-2 flex flex-col gap-4 justify-start cursor-pointer">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1"
+                  onClick={() => {
+                    if (selectedUser?.jid) {
+                      dispatch(deleteChat(selectedUser.jid));
+                      dispatch(clearNotification(selectedUser.jid)); // 🔥 CLEAR NOTIFICATION
+                      dispatch(selectUser(null)); // reset selected user
+                    }
+                  }}
+                >
                   <Delete className="mr-2" />
                   <span className="font-semibold">Delete Chat</span>
                 </div>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1"
+                  onClick={() => {
+                    if (selectedUser?.jid) {
+                      dispatch(clearMessages(selectedUser.jid));
+                    }
+                  }}
+                >
                   <Eraser className="mr-2" />
                   <span className="font-semibold">Clear Chat</span>
                 </div>
@@ -92,6 +113,7 @@ function Chat({ users, jid, client }) {
               </div>
             </PopoverContent>
           </Popover>
+
         </div>
       </div>
 
@@ -108,18 +130,16 @@ function Chat({ users, jid, client }) {
 
       >
         {messages.map((msg, index) => (
-          <div
-            key={index}
-            className={`flex ${msg.fromMe ? "justify-end" : "justify-start"}`}
-          >
-            <div
-              className={`${msg.fromMe ? "bg-[#A6E38D]" : "bg-gray-100"
-                } p-2 rounded-md max-w-xs`}
-            >
+          <div key={index} className={`flex ${msg.fromMe ? "justify-end" : "justify-start"}`}>
+            <div className={`${msg.fromMe ? "bg-[#A6E38D]" : "bg-gray-100"} p-2 rounded-md max-w-xs`}>
               <p className="text-sm text-gray-700 font-semibold">{msg.body}</p>
+              <p className="text-[10px] text-gray-500 font-bold text-right mt-1">
+                {new Date(msg.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+              </p>
             </div>
           </div>
         ))}
+
       </div>
 
       {/* Input Area */}

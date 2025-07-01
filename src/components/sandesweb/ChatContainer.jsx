@@ -56,25 +56,25 @@ function ChatContainer() {
       <div className="w-full max-w-7xl h-full sm:h-[90vh] flex flex-col sm:flex-row shadow rounded-lg overflow-hidden border-1 border-gray-300">
         <Sidebar users={users} jid={jid} presenceMap={presenceMap} />
         <div className="w-px h-full bg-gray-300"></div>
+{selectedUser ? (
+  <Chat
+    client={client}
+    users={[selectedUser]}
+    jid={jid}
+    password={password}
+    to={selectedUser.jid}
+  />
+) : (
+  <div className="h-full w-full flex flex-col items-center justify-center text-gray-500 text-4xl font-bold">
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/2462/2462719.png"
+      alt="Start Conversation"
+      className="w-40 h-40 mb-6 opacity-80"
+    />
+    Let's start conversation
+  </div>
+)}
 
-        {selectedUser ? (
-          <Chat
-            client={client}
-            users={[selectedUser]}
-            jid={jid}
-            password={password}
-            to={selectedUser.jid}
-          />
-        ) : (
-          <div className="h-full w-full flex flex-col items-center justify-center text-gray-500 text-4xl font-bold">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/2462/2462719.png"
-              alt="Start Conversation"
-              className="w-40 h-40 mb-6 opacity-80"
-            />
-            Let's start conversation
-          </div>
-        )}
       </div>
     </div>
   );
